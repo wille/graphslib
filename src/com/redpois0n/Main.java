@@ -3,6 +3,7 @@ package com.redpois0n;
 
 import javax.swing.JFrame;
 
+import com.redpois0n.windows.graphs.DefaultColors;
 import com.redpois0n.windows.graphs.Graph;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		Graph graph = new Graph();
+		Graph graph = new Graph(new DefaultColors());
 		
 		frame.add(graph);
 	}

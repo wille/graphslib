@@ -1,6 +1,9 @@
 package com.redpois0n;
 
+
 import javax.swing.JFrame;
+
+import com.redpois0n.windows.graphs.Graph;
 
 public class Main {
 
@@ -10,6 +13,10 @@ public class Main {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
+		Graph graph = new Graph();
+		
+		frame.add(graph);
 	}
 
 }

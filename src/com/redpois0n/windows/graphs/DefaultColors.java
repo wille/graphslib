@@ -16,7 +16,7 @@ public class DefaultColors implements IColors {
 
 	@Override
 	public Color getNetColor() {
-		return Color.green;
+		return new Color(0x008040);
 	}
 
 	

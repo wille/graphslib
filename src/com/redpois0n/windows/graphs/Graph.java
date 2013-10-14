@@ -8,6 +8,7 @@ import javax.swing.JComponent;
 public class Graph extends JComponent {
 
 	private final IColors colors;
+	private int position = 10;
 
 	public Graph(IColors colors) {
 		this.colors = colors;
@@ -24,10 +25,19 @@ public class Graph extends JComponent {
 		// draw meter squares
 		g.setColor(colors.getNetColor());
 		
+		
+		//decrease pos
+		position -= 2;
+		
 		for (int p = 0; p < this.getWidth(); p += 13) {				
 			g.drawLine(71, p, this.getWidth() - 1, p);
-			g.drawLine(71 + p, 2, 71 + p, this.getHeight());
+			g.drawLine(71 + p + position, 2, 71 + p + position, this.getHeight());
 		}		
+		
+		//reset pos
+		if (position == 0) {
+			position = 10;
+		}
 		
 		// draw first background rectangle
 		g.setColor(colors.getBorderColor());

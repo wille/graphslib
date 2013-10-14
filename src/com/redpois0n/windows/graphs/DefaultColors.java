@@ -19,5 +19,10 @@ public class DefaultColors implements IColors {
 		return new Color(0x008040);
 	}
 
+	@Override
+	public Color getCurveColor() {
+		return new Color(0x00FF00);
+	}
+
 	
 }

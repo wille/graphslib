@@ -3,11 +3,14 @@ package com.redpois0n.windows.graphs;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 public class Graph extends JComponent {
+	
+	public static final int MAXIMUM_VALUES = 1000;
 	
 	private final IColors colors;
 	private final List<Integer> values = new ArrayList<Integer>();
@@ -22,6 +25,11 @@ public class Graph extends JComponent {
 	public Graph(IColors colors) {
 		this.colors = colors;
 		new RepaintThread().start();
+		values.add(0);
+		
+		for (int i = 0; i < 50; i++) {
+			values.add((new Random()).nextInt(100));
+		}
 	}
 
 	@Override
@@ -53,11 +61,39 @@ public class Graph extends JComponent {
 		g.drawRect(0, 0, 68, this.getHeight());
 		g.drawRect(71, 0, this.getWidth(), this.getHeight());
 		
-		//draw main curve 
-		
-		
+		//draw main curve 		
+		g.setColor(colors.getCurveColor());
+		int index = values.size() - 1;
+		int value = 0;
+		for (int i = this.getWidth() - 3; i > 71; i--) {
+			if (index > 0) {
+				int latest = value;
+				value = values.get(index--);
+
+				g.drawLine(i, value, i + 5, latest);
+				
+				i -= 5;
+			} else {
+				break;
+			}
+		}
 
 		g.dispose();
+
+		values.add((new Random()).nextInt(100));
+
+	}
+	
+	public void addValue(int i) {
+		values.add(i);
+	}
+	
+	public int getLastValue() {
+		if (values.size() > 0) {
+			return values.get(values.size() - 1);
+		} else {
+			return -1;
+		}
 	}
 	
 	public void setMaximum(int maximum) {

@@ -3,7 +3,6 @@ package com.redpois0n.windows.graphs;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.swing.JComponent;
 
@@ -15,7 +14,7 @@ public class Graph extends JComponent {
 	private final IColors colors;
 	private final List<Integer> values = new ArrayList<Integer>();
 	
-	private int position = 10;
+	private int position = 8;
 	
 	/**
 	 * Max is 100 by default, 0 minimum
@@ -40,7 +39,7 @@ public class Graph extends JComponent {
 		
 		
 		//decrease pos
-		position -= 5;
+		position -= 4;
 		
 		for (int p = 0; p < this.getWidth(); p += 13) {				
 			g.drawLine(71, p, this.getWidth() - 1, p);
@@ -49,7 +48,7 @@ public class Graph extends JComponent {
 		
 		//reset pos
 		if (position == 0) {
-			position = 10;
+			position = 8;
 		}
 		
 		// draw first background rectangle
@@ -70,7 +69,7 @@ public class Graph extends JComponent {
 								
 				g.drawLine(i, this.getHeight() - value, i + 5, this.getHeight() - latest);
 				
-				i -= 5;
+				i -= 4;
 			} else {
 				break;
 			}

@@ -14,8 +14,11 @@ public class Main {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setLayout(null);
 		
 		final Graph graph = new Graph(new DefaultColors());
+		
+		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
 		
 		new Thread("Memory thread") {
 			@Override

@@ -1,5 +1,6 @@
 package com.redpois0n.windows.graphs;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Graph extends JComponent {
 	private final List<Integer> values = new ArrayList<Integer>();
 	
 	private int position = 8;
-	private String text;
+	private String text = "?";
 	
 	/**
 	 * Max is 100 by default, 0 minimum
@@ -104,6 +105,10 @@ public class Graph extends JComponent {
 				g.drawRect(17 + x, 7 + y, 0, 0);
 			}
 		}
+		
+		//draw text
+		g.setColor(colors.getCurveColor());
+		g.drawString(text, 17, this.getHeight() - 10);
 
 		g.dispose();
 

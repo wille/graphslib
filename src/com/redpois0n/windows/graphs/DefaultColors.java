@@ -27,6 +27,5 @@ public class DefaultColors implements IColors {
 	public Color getGreenMeterColor() {
 		return new Color(0x008000);
 	}
-
 	
 }

@@ -33,6 +33,8 @@ public class Main {
 					
 					graph.addValue((int) current);
 					
+					graph.setText(current + " mb");
+					
 					System.out.println("Current usage: " + current + ", Maximum usage: " + max);
 					
 					try {

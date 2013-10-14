@@ -26,10 +26,6 @@ public class Graph extends JComponent {
 		this.colors = colors;
 		new RepaintThread().start();
 		values.add(0);
-		
-		for (int i = 0; i < 50; i++) {
-			values.add((new Random()).nextInt(100));
-		}
 	}
 
 	@Override
@@ -44,7 +40,7 @@ public class Graph extends JComponent {
 		
 		
 		//decrease pos
-		position -= 2;
+		position -= 5;
 		
 		for (int p = 0; p < this.getWidth(); p += 13) {				
 			g.drawLine(71, p, this.getWidth() - 1, p);
@@ -69,8 +65,10 @@ public class Graph extends JComponent {
 			if (index > 0) {
 				int latest = value;
 				value = values.get(index--);
-
-				g.drawLine(i, value, i + 5, latest);
+				
+				value = (int) (((float) value / (float) maximum) * this.getHeight());
+								
+				g.drawLine(i, this.getHeight() - value, i + 5, this.getHeight() - latest);
 				
 				i -= 5;
 			} else {
@@ -79,8 +77,6 @@ public class Graph extends JComponent {
 		}
 
 		g.dispose();
-
-		values.add((new Random()).nextInt(100));
 
 	}
 	
@@ -105,6 +101,11 @@ public class Graph extends JComponent {
 	}
 
 	class RepaintThread extends Thread {
+		
+		public RepaintThread() {
+			super("Repaint thread");
+		}
+		
 		@Override
 		public void run() {
 			while (true) {

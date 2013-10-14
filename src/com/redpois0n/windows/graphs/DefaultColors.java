@@ -14,5 +14,10 @@ public class DefaultColors implements IColors {
 		return Color.white;
 	}
 
+	@Override
+	public Color getNetColor() {
+		return Color.getColor("00FF00");
+	}
+
 	
 }

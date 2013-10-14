@@ -8,4 +8,6 @@ public abstract interface IColors {
 	
 	public abstract Color getBorderColor();
 	
+	public abstract Color getNetColor();
+	
 }

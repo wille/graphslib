@@ -1,14 +1,23 @@
 package com.redpois0n.windows.graphs;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 public class Graph extends JComponent {
-
+	
 	private final IColors colors;
+	private final List<Integer> values = new ArrayList<Integer>();
+	
 	private int position = 10;
+	
+	/**
+	 * Max is 100 by default, 0 minimum
+	 */
+	private int maximum = 100; 
 
 	public Graph(IColors colors) {
 		this.colors = colors;
@@ -43,8 +52,20 @@ public class Graph extends JComponent {
 		g.setColor(colors.getBorderColor());
 		g.drawRect(0, 0, 68, this.getHeight());
 		g.drawRect(71, 0, this.getWidth(), this.getHeight());
+		
+		//draw main curve 
+		
+		
 
 		g.dispose();
+	}
+	
+	public void setMaximum(int maximum) {
+		this.maximum = maximum;
+	}
+	
+	public int getMaximum() {
+		return this.maximum;
 	}
 
 	class RepaintThread extends Thread {

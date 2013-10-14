@@ -15,6 +15,7 @@ public class Graph extends JComponent {
 	private final List<Integer> values = new ArrayList<Integer>();
 	
 	private int position = 8;
+	private String text;
 	
 	/**
 	 * Max is 100 by default, 0 minimum
@@ -63,15 +64,44 @@ public class Graph extends JComponent {
 		for (int i = this.getWidth() - 3; i > 71; i--) {
 			if (index > 0) {
 				int latest = value;
-				value = values.get(index--);
+				value = values.get(index--);		
 				
 				value = (int) (((float) value / (float) maximum) * this.getHeight());
-								
+					
+				if (latest == 0) {
+					latest = value;
+				}
+				
 				g.drawLine(i, this.getHeight() - value, i + 5, this.getHeight() - latest);
 				
 				i -= 4;
 			} else {
 				break;
+			}
+		}
+		
+		int liney = 0;
+		
+		//draw blocks in left meter
+		for (int x = 0; x < 34; x++) {
+			
+			if (x == 16) {
+				x = 18;
+			}
+			for (int y = 0; y < this.getHeight() - 30; y++) {
+				
+				if (liney++ == 1) {
+					y += 2;
+					liney = 0;
+				}
+				
+				if ((x + y) % 2 == 1) {
+					g.setColor(colors.getGreenMeterColor());
+				} else {
+					g.setColor(colors.getInnerFillColor());
+				}
+				
+				g.drawRect(17 + x, 7 + y, 0, 0);
 			}
 		}
 
@@ -99,6 +129,14 @@ public class Graph extends JComponent {
 		return this.maximum;
 	}
 
+	public String getText() {
+		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	class RepaintThread extends Thread {
 		
 		public RepaintThread() {

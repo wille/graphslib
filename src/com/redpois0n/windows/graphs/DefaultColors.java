@@ -23,6 +23,10 @@ public class DefaultColors implements IColors {
 	public Color getCurveColor() {
 		return new Color(0x00FF00);
 	}
+	
+	public Color getGreenMeterColor() {
+		return new Color(0x008000);
+	}
 
 	
 }

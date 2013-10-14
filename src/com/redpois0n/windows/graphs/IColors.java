@@ -11,5 +11,7 @@ public abstract interface IColors {
 	public abstract Color getNetColor();
 	
 	public abstract Color getCurveColor();
+	
+	public abstract Color getGreenMeterColor();
 		
 }

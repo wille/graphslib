@@ -1,6 +1,5 @@
 package com.redpois0n.windows.graphs;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +80,10 @@ public class Graph extends JComponent {
 			}
 		}
 		
-		int liney = 0;
 		
 		//draw blocks in left meter
+		int liney = 0;
+		int drawnBlocks = 0;
 		for (int x = 0; x < 34; x++) {
 			
 			if (x == 16) {
@@ -103,14 +103,33 @@ public class Graph extends JComponent {
 				}
 				
 				g.drawRect(17 + x, 7 + y, 0, 0);
+				drawnBlocks++;
 			}
 		}
 		
+		//do not calculate cuz blocks are drawn double
+		drawnBlocks /= 2;
+		
+	
+		//draw meter percent
+		value = getLastValue();
+		g.setColor(colors.getCurveColor());
+		
+		int todraw = (int) (((float) value / (float) maximum) * drawnBlocks);
+		int drawn = 0;
+		
+		if (value > 0) {
+			for (int y = this.getHeight() - 30; y > 7 && drawn < todraw; y--) {
+				drawn++;
+
+				g.drawRect(17, 7 + y, 33, 0);
+			}
+		}
+
 		//cover up some shit
 		g.setColor(colors.getInnerFillColor());
 		g.drawRect(1, this.getHeight() - 23, 60, 1);
-		g.drawRect(1, 7, 60, 1);
-
+		g.drawRect(1, 7, 60, 1);	
 		
 		//draw text
 		g.setColor(colors.getCurveColor());

@@ -106,6 +106,8 @@ public class Graph extends JComponent {
 			}
 		}
 		
+		
+		
 		//draw text
 		g.setColor(colors.getCurveColor());
 		g.drawString(text, 17, this.getHeight() - 10);

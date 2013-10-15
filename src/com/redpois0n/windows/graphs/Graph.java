@@ -87,7 +87,7 @@ public class Graph extends JComponent {
 		for (int x = 0; x < 34; x++) {
 			
 			if (x == 16) {
-				x = 18;
+				x = 17;
 			}
 			for (int y = 0; y < this.getHeight() - 30; y++) {
 				
@@ -106,7 +106,11 @@ public class Graph extends JComponent {
 			}
 		}
 		
-		
+		//cover up some shit
+		g.setColor(colors.getInnerFillColor());
+		g.drawRect(1, this.getHeight() - 23, 60, 1);
+		g.drawRect(1, 7, 60, 1);
+
 		
 		//draw text
 		g.setColor(colors.getCurveColor());

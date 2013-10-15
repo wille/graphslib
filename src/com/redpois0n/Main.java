@@ -28,6 +28,8 @@ public class Main {
 					
 					long current = (rt.totalMemory() - rt.freeMemory()) / 1024L / 1024L;
 					long max = rt.totalMemory() / 1024L / 1024L;
+					int percent =  (int) (((float) current / (float) max) * 100);;
+					
 					
 					graph.setMaximum((int) max);
 					
@@ -35,7 +37,7 @@ public class Main {
 					
 					graph.setText(current + " mb");
 					
-					System.out.println("Current usage: " + current + ", Maximum usage: " + max);
+					System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
 					
 					try {
 						Thread.sleep(1000L);

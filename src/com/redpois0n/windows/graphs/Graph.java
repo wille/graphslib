@@ -107,23 +107,29 @@ public class Graph extends JComponent {
 			}
 		}
 		
-		//do not calculate cuz blocks are drawn double
-		drawnBlocks /= 2;
-		
-	
 		//draw meter percent
 		value = getLastValue();
 		g.setColor(colors.getCurveColor());
 		
-		int todraw = (int) (((float) value / (float) maximum) * drawnBlocks);
+		int todraw = (int) (((float) value / (float) maximum) * this.getHeight());
 		int drawn = 0;
 		
-		if (value > 0) {
-			for (int y = this.getHeight() - 30; y > 7 && drawn < todraw; y--) {
-				drawn++;
+		if (value > 0) {	
+			for (int x = 0; x < 34; x++) {
+				
+				if (x == 16) {
+					x = 17;
+				}
+				
+				for (int y = this.getHeight() - 33; y > 7 && drawn < todraw; y--) {
+					drawn++;
 
-				g.drawRect(17, 7 + y, 33, 0);
+					g.drawRect(17 + x, 7 + y, 15, 0);
+					g.drawRect(34 + x, 7 + y, 16, 0);
+
+				}
 			}
+			
 		}
 
 		//cover up some shit

@@ -108,10 +108,11 @@ public class Graph extends JComponent {
 		}
 		
 		//draw meter percent
-		value = maximum - 50;//getLastValue();
+		value = getLastValue();
+		System.out.println("Value: " + value + ", Maximum: " + maximum);
 		g.setColor(colors.getCurveColor());
 		
-		int todraw = (int) (((float) value / (float) maximum) * this.getHeight() - 34);
+		int todraw = (int) (((float) value / (float) maximum) * (this.getHeight() - 33));
 		int drawn = 0;
 
 		if (value > 0) {	

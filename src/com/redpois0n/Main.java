@@ -1,6 +1,8 @@
 package com.redpois0n;
 
 
+import java.util.Random;
+
 import javax.swing.JFrame;
 
 import com.redpois0n.windows.graphs.DefaultColors;
@@ -31,13 +33,13 @@ public class Main {
 					int percent =  (int) (((float) current / (float) max) * 100);
 					
 					
-					graph.setMaximum((int) max);
+					graph.setMaximum(10000);
 					
-					graph.addValue((int) current);
+					graph.addValue(new Random().nextInt(10000));//(int) current);
 					
 					graph.setText(current + " mb");
 					
-					System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
+					//System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
 					
 					try {
 						Thread.sleep(1000L);

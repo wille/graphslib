@@ -28,7 +28,7 @@ public class Main {
 					
 					long current = (rt.totalMemory() - rt.freeMemory()) / 1024L / 1024L;
 					long max = rt.totalMemory() / 1024L / 1024L;
-					int percent =  (int) (((float) current / (float) max) * 100);;
+					int percent =  (int) (((float) current / (float) max) * 100);
 					
 					
 					graph.setMaximum((int) max);

@@ -3,6 +3,7 @@ package com.redpois0n.windows.graphs;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JComponent;
 
@@ -108,7 +109,7 @@ public class Graph extends JComponent {
 		}
 		
 		//draw meter percent
-		value = getLastValue();
+		value = getLastValue() + (new Random()).nextInt(500);
 		g.setColor(colors.getCurveColor());
 		
 		int todraw = (int) (((float) value / (float) maximum) * this.getHeight());
@@ -121,9 +122,16 @@ public class Graph extends JComponent {
 					x = 17;
 				}
 				
+				liney = -1;
+				
 				for (int y = this.getHeight() - 33; y > 7 && drawn < todraw; y--) {
 					drawn++;
 
+					if (liney++ == 1) {
+						y -= 2;
+						liney = 0;
+					}
+					
 					g.drawRect(17 + x, 7 + y, 15, 0);
 					g.drawRect(34 + x, 7 + y, 16, 0);
 

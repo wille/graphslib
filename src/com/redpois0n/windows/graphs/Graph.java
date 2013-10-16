@@ -9,6 +9,9 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class Graph extends JComponent {
 	
+	/**
+	 * Maximum values saved in memory
+	 */
 	public static final int MAXIMUM_VALUES = 1000;
 	
 	private final IColors colors;
@@ -30,6 +33,12 @@ public class Graph extends JComponent {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		if (values.size() > MAXIMUM_VALUES) {
+			for (int i = 0; i < MAXIMUM_VALUES / 10; i++) {
+				values.remove(0);
+			}
+		}
+		
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, 67, this.getHeight() - 1);

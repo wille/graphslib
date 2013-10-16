@@ -127,14 +127,13 @@ public class TaskmgrGraph extends JComponent {
 					liney = 0;
 				}
 				
-
 				if ((x + y) % 2 == 1) {
 					g.setColor(colors.getGreenMeterColor());
 				} else {
 					g.setColor(colors.getInnerFillColor());
 				}
 
-				g.drawRect(17 + x, 7 + y, 0, 0);
+				g.drawRect(17 + x, x >= 17 ? 6 + y : 7 + y, 0, 0);
 			}
 		}
 
@@ -164,7 +163,7 @@ public class TaskmgrGraph extends JComponent {
 					}
 
 					g.drawRect(17, 8 + y, 15, 0);
-					g.drawRect(34, 7 + y, 16, 0);
+					g.drawRect(34, 8 + y, 16, 0);
 
 				}
 			}
@@ -174,7 +173,7 @@ public class TaskmgrGraph extends JComponent {
 		// cover up some shit
 		g.setColor(colors.getInnerFillColor());
 		g.drawRect(1, this.getHeight() - 23, 60, 1);
-		g.drawRect(1, 7, 60, 1);
+		g.drawRect(1, 6, 60, 1);
 
 		// draw text
 		g.setColor(colors.getCurveColor());

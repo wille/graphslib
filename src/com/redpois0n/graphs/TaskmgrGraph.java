@@ -1,4 +1,4 @@
-package com.redpois0n.windows.graphs;
+package com.redpois0n.graphs;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
-public class Graph extends JComponent {
+public class TaskmgrGraph extends JComponent {
 	
 	/**
 	 * Time between ticks in ms
@@ -49,7 +49,7 @@ public class Graph extends JComponent {
 	 */
 	private boolean running = true;
 
-	public Graph(IColors colors) {
+	public TaskmgrGraph(IColors colors) {
 		this.colors = colors;
 		new RepaintThread().start();
 		values.add(0);
@@ -126,6 +126,7 @@ public class Graph extends JComponent {
 					y += 2;
 					liney = 0;
 				}
+				
 
 				if ((x + y) % 2 == 1) {
 					g.setColor(colors.getGreenMeterColor());
@@ -162,7 +163,7 @@ public class Graph extends JComponent {
 						liney = 0;
 					}
 
-					g.drawRect(17, 7 + y, 15, 0);
+					g.drawRect(17, 8 + y, 15, 0);
 					g.drawRect(34, 7 + y, 16, 0);
 
 				}
@@ -228,7 +229,7 @@ public class Graph extends JComponent {
 		public void run() {
 			while (running) {
 				try {
-					Graph.this.repaint();
+					TaskmgrGraph.this.repaint();
 					Thread.sleep(TICKS);
 				} catch (Exception ex) {
 					ex.printStackTrace();

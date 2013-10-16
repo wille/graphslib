@@ -1,4 +1,4 @@
-package com.redpois0n.windows.graphs;
+package com.redpois0n.graphs;
 
 import java.awt.Color;
 

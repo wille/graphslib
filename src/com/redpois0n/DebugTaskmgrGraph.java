@@ -5,20 +5,20 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import com.redpois0n.windows.graphs.DefaultColors;
-import com.redpois0n.windows.graphs.Graph;
+import com.redpois0n.graphs.DefaultColors;
+import com.redpois0n.graphs.TaskmgrGraph;
 
-public class Main {
+public class DebugTaskmgrGraph {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(750, 450);
+		frame.setSize(1500, 1000);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setLayout(null);
 		
-		final Graph graph = new Graph(new DefaultColors());
+		final TaskmgrGraph graph = new TaskmgrGraph(new DefaultColors());
 		
 		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
 		

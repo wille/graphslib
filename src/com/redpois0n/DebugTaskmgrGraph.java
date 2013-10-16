@@ -5,8 +5,8 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import com.redpois0n.graphs.DefaultColors;
 import com.redpois0n.graphs.TaskmgrGraph;
+import com.redpois0n.graphs.colors.DefaultColors;
 
 public class DebugTaskmgrGraph {
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import com.redpois0n.graphs.colors.IColors;
+
 @SuppressWarnings("serial")
 public class TaskmgrGraph extends JComponent {
 	

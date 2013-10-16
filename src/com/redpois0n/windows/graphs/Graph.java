@@ -13,11 +13,13 @@ public class Graph extends JComponent {
 	 * Maximum values saved in memory
 	 */
 	public static final int MAXIMUM_VALUES = 1000;
+	
+	public static final int PIXELS_EACH_TICK = 10;
 
 	private final IColors colors;
 	private final List<Integer> values = new ArrayList<Integer>();
 
-	private int position = 8;
+	private int position = PIXELS_EACH_TICK * 3;
 	private String text = "?";
 
 	/**
@@ -48,7 +50,7 @@ public class Graph extends JComponent {
 		g.setColor(colors.getNetColor());
 
 		// decrease pos
-		position -= 4;
+		position -= PIXELS_EACH_TICK;
 
 		// draw lines
 		for (int p = 0; p < this.getWidth(); p += 13) {
@@ -58,7 +60,7 @@ public class Graph extends JComponent {
 
 		// reset pos
 		if (position == 0) {
-			position = 8;
+			position = PIXELS_EACH_TICK * 3;
 		}
 
 		// draw first background rectangle
@@ -83,7 +85,7 @@ public class Graph extends JComponent {
 
 				g.drawLine(i, this.getHeight() - value, i + 5, this.getHeight() - latest);
 
-				i -= 4;
+				i -= 2;
 			} else {
 				break;
 			}

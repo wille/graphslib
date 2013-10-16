@@ -35,9 +35,12 @@ public class Main {
 					
 					graph.setMaximum(10000);
 					
-					graph.addValue(new Random().nextInt(10000));//(int) current);
+					int value = new Random().nextInt(10000);
 					
-					graph.setText(current + " mb");
+					graph.addValue(value);//(int) current);
+					
+					graph.setText(value + "");
+					//graph.setText(current + " mb");
 					
 					//System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
 					

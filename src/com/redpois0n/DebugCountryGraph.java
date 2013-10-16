@@ -1,13 +1,24 @@
 package com.redpois0n;
 
+import javax.swing.JFrame;
+
+import com.redpois0n.graphs.CountryGraph;
+
 public class DebugCountryGraph {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		JFrame frame = new JFrame();
+		frame.setSize(1500, 1000);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.setLayout(null);
+		
+		final CountryGraph graph = new CountryGraph();
+		
+		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
+		
+		frame.setVisible(true);
 	}
 
 }

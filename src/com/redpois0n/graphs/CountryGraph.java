@@ -21,7 +21,13 @@ public class CountryGraph extends JComponent {
 	}
 	
 	public void add(Country country) {
-		
+		if (!countries.contains(country)) {
+			countries.add(country);
+		}
+	}
+	
+	public void remove(Country country) {
+		countries.remove(country);
 	}
 
 

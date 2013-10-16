@@ -15,9 +15,12 @@ public class Country {
 	
 	private final String iso2;
 	
-	public Country(String iso2) throws Exception {
+	private int number;
+	
+	public Country(String iso2, int number) throws Exception {
 		this.iso2 = iso2;
 		this.flag = loadFlag(iso2);
+		this.number = number;
 	}
 	
 	public String getIso() {
@@ -26,6 +29,14 @@ public class Country {
 	
 	public ImageIcon getFlag() {
 		return flag;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public static ImageIcon loadFlag(String flag) throws Exception {
@@ -39,5 +50,14 @@ public class Country {
 		}
 				
 		return icon;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Country) {
+			return ((Country)o).iso2.equals(this.iso2);
+		} else {
+			return false;
+		}
 	}
 }

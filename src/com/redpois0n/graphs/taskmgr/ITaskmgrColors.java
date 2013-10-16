@@ -1,8 +1,8 @@
-package com.redpois0n.graphs.colors;
+package com.redpois0n.graphs.taskmgr;
 
 import java.awt.Color;
 
-public abstract interface IColors {
+public abstract interface ITaskmgrColors {
 	
 	public abstract Color getInnerFillColor();
 	

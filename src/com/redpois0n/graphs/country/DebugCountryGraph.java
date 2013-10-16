@@ -1,8 +1,7 @@
-package com.redpois0n.debug;
+package com.redpois0n.graphs.country;
 
 import javax.swing.JFrame;
 
-import com.redpois0n.graphs.CountryGraph;
 
 public class DebugCountryGraph {
 

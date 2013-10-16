@@ -1,4 +1,4 @@
-package com.redpois0n.graphs;
+package com.redpois0n.graphs.taskmgr;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import com.redpois0n.graphs.colors.IColors;
 
 @SuppressWarnings("serial")
 public class TaskmgrGraph extends JComponent {
@@ -24,7 +23,7 @@ public class TaskmgrGraph extends JComponent {
 	/**
 	 * Colors to use
 	 */
-	private final IColors colors;
+	private final ITaskmgrColors colors;
 	
 	/**
 	 * Where valued are saved to be drawn
@@ -51,7 +50,7 @@ public class TaskmgrGraph extends JComponent {
 	 */
 	private boolean running = true;
 
-	public TaskmgrGraph(IColors colors) {
+	public TaskmgrGraph(ITaskmgrColors colors) {
 		this.colors = colors;
 		new RepaintThread().start();
 		values.add(0);

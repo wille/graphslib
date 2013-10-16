@@ -1,4 +1,4 @@
-package com.redpois0n.graphs;
+package com.redpois0n.graphs.country;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import com.redpois0n.Country;
 
 @SuppressWarnings("serial")
 public class CountryGraph extends JComponent {

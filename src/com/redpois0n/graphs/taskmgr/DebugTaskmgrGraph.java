@@ -1,12 +1,10 @@
-package com.redpois0n.debug;
+package com.redpois0n.graphs.taskmgr;
 
 
 import java.util.Random;
 
 import javax.swing.JFrame;
 
-import com.redpois0n.graphs.TaskmgrGraph;
-import com.redpois0n.graphs.colors.DefaultColors;
 
 public class DebugTaskmgrGraph {
 
@@ -18,7 +16,7 @@ public class DebugTaskmgrGraph {
 		frame.setVisible(true);
 		frame.setLayout(null);
 		
-		final TaskmgrGraph graph = new TaskmgrGraph(new DefaultColors());
+		final TaskmgrGraph graph = new TaskmgrGraph(new TaskmgrColors());
 		
 		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
 		

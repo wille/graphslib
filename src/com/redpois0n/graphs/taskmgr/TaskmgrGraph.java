@@ -86,7 +86,7 @@ public class TaskmgrGraph extends JComponent {
 			position = 9;
 		}
 
-		// draw first background rectangle
+		// draw background rectangles
 		g.setColor(colors.getBorderColor());
 		g.drawRect(0, 0, 68, this.getHeight());
 		g.drawRect(71, 0, this.getWidth(), this.getHeight());

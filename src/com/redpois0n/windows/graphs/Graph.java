@@ -115,7 +115,6 @@ public class Graph extends JComponent {
 
 		// draw blocks in left meter
 		int liney = 0;
-		int drawnBlocks = 0;
 		for (int x = 0; x < 34; x++) {
 
 			if (x == 16) {
@@ -135,7 +134,6 @@ public class Graph extends JComponent {
 				}
 
 				g.drawRect(17 + x, 7 + y, 0, 0);
-				drawnBlocks++;
 			}
 		}
 

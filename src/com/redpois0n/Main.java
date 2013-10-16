@@ -33,17 +33,35 @@ public class Main {
 					int percent =  (int) (((float) current / (float) max) * 100);
 					
 					
+					graph.setMaximum((int) max);
+										
+					graph.addValue((int) current);
+					
+					graph.setText(current + " mb");
+					
+					System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
+					
+					try {
+						Thread.sleep(1000L);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};//.start();
+		
+		new Thread("Random thread") {
+			@Override
+			public void run() {
+				while (true) {				
 					graph.setMaximum(10000);
 					
 					int value = new Random().nextInt(10000);
 					
-					graph.addValue(value);//(int) current);
+					graph.addValue(value);
 					
 					graph.setText(value + "");
-					//graph.setText(current + " mb");
-					
-					//System.out.println("Current usage: " + current + ", Maximum usage: " + max + ", Percent: " + percent);
-					
+									
 					try {
 						Thread.sleep(1000L);
 					} catch (Exception e) {

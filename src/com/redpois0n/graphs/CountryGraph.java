@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import com.redpois0n.Country;
+
 @SuppressWarnings("serial")
 public class CountryGraph extends JComponent {
 	

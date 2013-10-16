@@ -1,4 +1,4 @@
-package com.redpois0n;
+package com.redpois0n.debug;
 
 
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.redpois0n;
+package com.redpois0n.debug;
 
 import javax.swing.JFrame;
 
@@ -8,7 +8,7 @@ public class DebugCountryGraph {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(1500, 1000);
+		frame.setSize(500, 350);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

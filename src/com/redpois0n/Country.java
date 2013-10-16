@@ -1,4 +1,4 @@
-package com.redpois0n.graphs;
+package com.redpois0n;
 
 import java.util.HashMap;
 import java.util.Map;

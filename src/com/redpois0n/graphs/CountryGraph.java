@@ -1,11 +1,15 @@
 package com.redpois0n.graphs;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 public class CountryGraph extends JComponent {
+	
+	private final List<Country> countries = new ArrayList<Country>();
 	
 	public CountryGraph() {
 		
@@ -16,30 +20,8 @@ public class CountryGraph extends JComponent {
 		
 	}
 	
-	public void dispose() {
-		running = false;
-	}
-	
-	class RepaintThread extends Thread {
-
-		public RepaintThread() {
-			super("Repaint thread");
-		}
-
-		/**
-		 * Repaints each tick
-		 */
-		@Override
-		public void run() {
-			while (running) {
-				try {
-					CountryGraph.this.repaint();
-					Thread.sleep(TICKS);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
+	public void add(Country country) {
+		
 	}
 
 

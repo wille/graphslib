@@ -8,22 +8,46 @@ import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 public class Graph extends JComponent {
+	
+	/**
+	 * Time between ticks in ms
+	 */
+	public static final long TICKS = 1000L;
 
 	/**
 	 * Maximum values saved in memory
 	 */
 	public static final int MAXIMUM_VALUES = 1000;
 	
+	/**
+	 * Colors to use
+	 */
 	private final IColors colors;
+	
+	/**
+	 * Where valued are saved to be drawn
+	 */
 	private final List<Integer> values = new ArrayList<Integer>();
 
+	/**
+	 * Current position to draw net at
+	 */
 	private int position = 9;
+	
+	/**
+	 * Text to draw
+	 */
 	private String text = "?";
 
 	/**
 	 * Max is 100 by default, 0 minimum
 	 */
 	private int maximum = 100;
+	
+	/**
+	 * Is this component still active
+	 */
+	private boolean running = true;
 
 	public Graph(IColors colors) {
 		this.colors = colors;
@@ -188,6 +212,10 @@ public class Graph extends JComponent {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	public void dispose() {
+		running = false;
+	}
 
 	class RepaintThread extends Thread {
 
@@ -195,12 +223,15 @@ public class Graph extends JComponent {
 			super("Repaint thread");
 		}
 
+		/**
+		 * Repaints each tick
+		 */
 		@Override
 		public void run() {
-			while (true) {
+			while (running) {
 				try {
 					Graph.this.repaint();
-					Thread.sleep(1000L);
+					Thread.sleep(TICKS);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}

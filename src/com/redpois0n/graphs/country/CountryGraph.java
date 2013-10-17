@@ -1,7 +1,9 @@
 package com.redpois0n.graphs.country;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +56,14 @@ public class CountryGraph extends JComponent {
 				max = country.getNumber();
 			}
 		}
+		
+		if (drawNumber) {
+			int degrees = -90;
+			AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(degrees));
+
+			Font f = new Font("Arial", Font.BOLD, 12);
+			g.setFont(f.deriveFont(at));
+		}
 
 		// draw lines and flags
 		for (int i = 0; i < countries.size(); i++) {
@@ -71,6 +81,11 @@ public class CountryGraph extends JComponent {
 			g.fillRect(x, this.getHeight() - value - 1, 10, this.getHeight());
 
 			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
+
+			if (drawNumber) {
+				g.setColor(colors.getTextColor());
+				g.drawString(country.getNumber() + "", x + 10, this.getHeight() - value + 25);
+			}
 		}
 
 		onListUpdate(countries);

@@ -13,5 +13,10 @@ public class CountryColors implements ICountryColors {
 	public Color getBorderColor() {
 		return Color.gray;
 	}
+
+	@Override
+	public Color getTextColor() {
+		return Color.black;
+	}
 	
 }

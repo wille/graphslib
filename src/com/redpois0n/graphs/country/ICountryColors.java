@@ -7,5 +7,7 @@ public abstract interface ICountryColors {
 	public abstract Color getInnerFillColor();
 	
 	public abstract Color getBorderColor();
+
+	public abstract Color getTextColor();
 			
 }

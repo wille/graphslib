@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -38,20 +40,25 @@ public class CountryGraph extends JComponent {
 		int max = 0;
 
 		List<Country> sorted = new ArrayList<Country>();
+		
+		
+		
+		Collections.sort(countries, new Comparator<Country>() {
+		    public int compare(Country country, Country country1) {
+		        return country.getNumber() - country1.getNumber();
+		    }
+		});
 
-		for (int i = 0; i < countries.size() && sorted.size() != countries.size(); i++) {
+		for (int i = 0; i < countries.size(); i++) {
 			Country country = countries.get(i);
 
 			if (country.getNumber() > max) {
-				sorted.add(sorted.size(), country);
 				max = country.getNumber();
 			}
 		}
 		
-		System.out.println(max);
-
-		for (int i = 0; i < sorted.size(); i++) {
-			Country country = sorted.get(i);
+		for (int i = 0; i < countries.size(); i++) {
+			Country country = countries.get(i);
 
 			int value = (int) (((float) (country.getNumber() - 15) / (float) max) * this.getHeight());
 

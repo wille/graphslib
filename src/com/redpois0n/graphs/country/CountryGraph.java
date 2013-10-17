@@ -32,31 +32,32 @@ public class CountryGraph extends JComponent {
 		g.drawRect(0, 0, 101, this.getHeight() - 1);
 		g.drawRect(104, 0, this.getWidth() - 106, this.getHeight() - 1);
 
-		
 		int max = 0;
-		
+
 		List<Country> sorted = new ArrayList<Country>();
-		
+
 		for (int i = 0; i < countries.size() && sorted.size() != countries.size(); i++) {
 			Country country = countries.get(i);
-			
+
 			if (country.getNumber() > max) {
 				sorted.add(0, country);
 				max = country.getNumber();
 			}
 		}
-				
+
 		for (int i = 0; i < sorted.size(); i++) {
 			Country country = countries.get(i);
-			
+
 			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight());
-			
-			System.out.println(value);
+
+			int x = 115 + (i * 15);
 
 			g.setColor(getMainColor(country.getFlag()));
-			g.fillRect(115 + (i), value, 10, this.getWidth() - 1);
+			g.fillRect(x, value, 10, this.getWidth() - 1);
+			
+			g.drawImage(country.getFlag().getImage(), x - 3, value - 10, 16, 11, null);
 		}
-		
+
 	}
 
 	public void add(Country country) {
@@ -70,16 +71,15 @@ public class CountryGraph extends JComponent {
 	}
 
 	public static Color getMainColor(ImageIcon icon) {
-		BufferedImage image = new BufferedImage(BufferedImage.TYPE_INT_RGB, icon.getIconWidth(), icon.getIconHeight());
+		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+		
+		
 		image.createGraphics();
 		image.getGraphics().drawImage(icon.getImage(), 0, 0, null);
 		int clr = image.getRGB(image.getWidth() / 2, image.getHeight() / 2);
-		int red = (clr & 0x00ff0000) >> 16;
-		int green = (clr & 0x0000ff00) >> 8;
-		int blue = clr & 0x000000ff;
 
 		image.getGraphics().dispose();
-		
+
 		return new Color(clr);
 	}
 

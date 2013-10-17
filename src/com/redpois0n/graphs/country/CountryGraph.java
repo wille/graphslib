@@ -17,7 +17,7 @@ public class CountryGraph extends JComponent {
 	private final List<Country> countries = new ArrayList<Country>();
 
 	private ICountryColors colors;
-	
+
 	private boolean showIso2 = true;
 	private boolean drawNumber = true;
 
@@ -38,15 +38,15 @@ public class CountryGraph extends JComponent {
 		int max = 0;
 
 		List<Country> sorted = new ArrayList<Country>();
-		
-		
-		
+
+		// sort countries
 		Collections.sort(countries, new Comparator<Country>() {
-		    public int compare(Country country, Country country1) {
-		        return country.getNumber() - country1.getNumber();
-		    }
+			public int compare(Country country, Country country1) {
+				return country.getNumber() - country1.getNumber();
+			}
 		});
 
+		// get highest
 		for (int i = 0; i < countries.size(); i++) {
 			Country country = countries.get(i);
 
@@ -54,29 +54,30 @@ public class CountryGraph extends JComponent {
 				max = country.getNumber();
 			}
 		}
-		
+
+		// draw lines and flags
 		for (int i = 0; i < countries.size(); i++) {
 			Country country = countries.get(i);
 
 			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;
 
 			int x = 15 + i * 20;
-			
+
 			if (value < 20) {
 				value += 20;
 			}
 
 			g.setColor(getMainColor(country.getFlag()));
 			g.fillRect(x, this.getHeight() - value - 1, 10, this.getHeight());
-			
+
 			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
 		}
 
 		onListUpdate(countries);
 	}
-	
+
 	public void onListUpdate(List<Country> sortedList) {
-		
+
 	}
 
 	public void add(Country country) {
@@ -107,8 +108,7 @@ public class CountryGraph extends JComponent {
 
 	public static Color getMainColor(ImageIcon icon) {
 		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
-		
-		
+
 		image.createGraphics();
 		image.getGraphics().drawImage(icon.getImage(), 0, 0, null);
 		int clr = image.getRGB(image.getWidth() / 2, image.getHeight() / 2);

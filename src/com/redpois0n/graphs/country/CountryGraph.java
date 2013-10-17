@@ -15,6 +15,9 @@ public class CountryGraph extends JComponent {
 	private final List<Country> countries = new ArrayList<Country>();
 
 	private ICountryColors colors;
+	
+	private boolean showIso2 = true;
+	private boolean drawNumber = true;
 
 	public CountryGraph(ICountryColors colors) {
 		this.colors = colors;
@@ -40,22 +43,24 @@ public class CountryGraph extends JComponent {
 			Country country = countries.get(i);
 
 			if (country.getNumber() > max) {
-				sorted.add(0, country);
+				sorted.add(sorted.size(), country);
 				max = country.getNumber();
 			}
 		}
+		
+		System.out.println(max);
 
 		for (int i = 0; i < sorted.size(); i++) {
-			Country country = countries.get(i);
+			Country country = sorted.get(i);
 
-			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight());
+			int value = (int) (((float) (country.getNumber() - 15) / (float) max) * this.getHeight());
 
-			int x = 115 + (i * 15);
+			int x = 115 + (i * 20);
 
 			g.setColor(getMainColor(country.getFlag()));
-			g.fillRect(x, value, 10, this.getWidth() - 1);
+			g.fillRect(x, value, 10, this.getHeight() - value - 1);
 			
-			g.drawImage(country.getFlag().getImage(), x - 3, value - 10, 16, 11, null);
+			g.drawImage(country.getFlag().getImage(), x - 3, value - 13, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
 		}
 
 	}
@@ -68,6 +73,22 @@ public class CountryGraph extends JComponent {
 
 	public void remove(Country country) {
 		countries.remove(country);
+	}
+
+	public boolean isShowIso2() {
+		return showIso2;
+	}
+
+	public void setShowIso2(boolean showIso2) {
+		this.showIso2 = showIso2;
+	}
+
+	public boolean isDrawNumber() {
+		return drawNumber;
+	}
+
+	public void setDrawNumber(boolean drawNumber) {
+		this.drawNumber = drawNumber;
 	}
 
 	public static Color getMainColor(ImageIcon icon) {

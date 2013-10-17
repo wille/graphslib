@@ -26,11 +26,11 @@ public class DebugCountryGraph {
 		Random random = new Random();
 		
 		try {
-			graph.add(new Country("se", random.nextInt(1000)));
-			graph.add(new Country("no", random.nextInt(1000)));
-			graph.add(new Country("us", random.nextInt(1000)));
-			graph.add(new Country("ru", random.nextInt(1000)));
-			graph.add(new Country("gb", random.nextInt(1000)));
+			graph.add(new Country("se", 100));
+			graph.add(new Country("no", 75));
+			graph.add(new Country("us", 50));
+			graph.add(new Country("ru", 25));
+			graph.add(new Country("gb", 0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -29,13 +29,11 @@ public class CountryGraph extends JComponent {
 	public void paintComponent(Graphics g) {
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
-		g.fillRect(1, 1, 100, this.getHeight() - 1);
-		g.fillRect(105, 1, this.getWidth() - 1, this.getHeight() - 1);
+		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 
 		// draw background rectangles
 		g.setColor(colors.getBorderColor());
-		g.drawRect(0, 0, 101, this.getHeight() - 1);
-		g.drawRect(104, 0, this.getWidth() - 106, this.getHeight() - 1);
+		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
 
 		int max = 0;
 
@@ -60,16 +58,25 @@ public class CountryGraph extends JComponent {
 		for (int i = 0; i < countries.size(); i++) {
 			Country country = countries.get(i);
 
-			int value = (int) (((float) (country.getNumber() - 15) / (float) max) * this.getHeight());
+			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;
 
-			int x = 115 + (i * 20);
+			int x = 15 + i * 20;
+			
+			if (value < 20) {
+				value += 20;
+			}
 
 			g.setColor(getMainColor(country.getFlag()));
-			g.fillRect(x, value, 10, this.getHeight() - value - 1);
+			g.fillRect(x, this.getHeight() - value - 1, 10, this.getHeight());
 			
-			g.drawImage(country.getFlag().getImage(), x - 3, value - 13, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
+			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
 		}
 
+		onListUpdate(countries);
+	}
+	
+	public void onListUpdate(List<Country> sortedList) {
+		
 	}
 
 	public void add(Country country) {

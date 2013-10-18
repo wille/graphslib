@@ -88,10 +88,10 @@ public class CountryGraph extends JComponent {
 			}
 		}
 
-		onListUpdate(countries);
+		onUpdate(countries, 15 + countries.size() * 20);
 	}
 
-	public void onListUpdate(List<Country> sortedList) {
+	public void onUpdate(List<Country> sortedList, int recommendedX) {
 
 	}
 

@@ -24,6 +24,7 @@ public class CountryGraph extends JComponent {
 
 	private boolean showIso2 = true;
 	private boolean drawNumber = true;
+	private boolean isActive;
 
 	public CountryGraph(ICountryColors colors) {
 		this.colors = colors;
@@ -99,6 +100,14 @@ public class CountryGraph extends JComponent {
 
 	public void onUpdate(List<Country> sortedList, int recommendedX) {
 
+	}
+	
+	public void dispose() {
+		isActive = false;
+	}
+	
+	public boolean isActive() {
+		return isActive;
 	}
 
 	public void add(Country country) {

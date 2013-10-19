@@ -72,14 +72,14 @@ public class CountryGraph extends JComponent {
 
 			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;
 
-			int x = 15 + pos++ * 20;
-
-			if (value < 20) {
-				value += 20;
+			int x = 15 + pos++ * 20;		
+			
+			if (value < 1) {
+				value = 1;
 			}
-
+			
 			g.setColor(getMainColor(country.getFlag()));
-			g.fillRect(x, this.getHeight() - value - 1, 10, this.getHeight());
+			g.fillRect(x, this.getHeight() - value - 10, 10, this.getHeight());
 
 			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
 

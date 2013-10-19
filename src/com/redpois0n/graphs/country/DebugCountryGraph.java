@@ -22,11 +22,20 @@ public class DebugCountryGraph {
 		frame.setVisible(true);
 				
 		try {
-			graph.add(new Country("se", 100));
-			graph.add(new Country("no", 75));
-			graph.add(new Country("us", 50));
-			graph.add(new Country("ru", 25));
-			graph.add(new Country("gb", 0));
+			int max = 10;
+			
+			graph.add(new Country("gb", max));
+			graph.add(new Country("se", max / 2));
+			graph.add(new Country("no", max / 2));
+			graph.add(new Country("us", max / 4));
+			graph.add(new Country("ru", max / 4));	
+			graph.add(new Country("co", max / 6));
+			graph.add(new Country("ca", max / 6));
+			graph.add(new Country("mx", max / 8));
+			graph.add(new Country("de", max / 8));
+			graph.add(new Country("ca", max / 10));
+			graph.add(new Country("fi", max / 10));
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,5 @@
 package com.redpois0n.graphs.country;
 
-import java.util.Random;
-
 import javax.swing.JFrame;
 
 
@@ -22,9 +20,7 @@ public class DebugCountryGraph {
 		frame.add(graph);
 		
 		frame.setVisible(true);
-		
-		Random random = new Random();
-		
+				
 		try {
 			graph.add(new Country("se", 100));
 			graph.add(new Country("no", 75));

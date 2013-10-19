@@ -46,8 +46,6 @@ public class CountryGraph extends JComponent {
 
 		int max = 0;
 
-		List<Country> sorted = new ArrayList<Country>();
-
 		// sort countries
 		Collections.sort(countries, new Comparator<Country>() {
 			public int compare(Country country, Country country1) {
@@ -65,8 +63,7 @@ public class CountryGraph extends JComponent {
 		}
 		
 		if (drawNumber) {
-			int degrees = -90;
-			AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(degrees));
+			AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
 
 			Font f = new Font("Arial", Font.BOLD, 12);
 			g.setFont(f.deriveFont(at));
@@ -111,9 +108,15 @@ public class CountryGraph extends JComponent {
 	}
 
 	public void add(Country country) {
-		if (!countries.contains(country)) {
-			countries.add(country);
+		for (int i = 0; i < countries.size(); i++) {
+			Country old = countries.get(i);
+			if (old.equals(country)) {
+				old.setNumber(country.getNumber());
+				return;
+			}
 		}
+		
+		countries.add(country);
 	}
 
 	public void remove(Country country) {
@@ -136,6 +139,10 @@ public class CountryGraph extends JComponent {
 		this.drawNumber = drawNumber;
 	}
 
+	public void clear() {
+		countries.clear();
+	}
+	
 	public static Color getMainColor(ImageIcon icon) {
 		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
 

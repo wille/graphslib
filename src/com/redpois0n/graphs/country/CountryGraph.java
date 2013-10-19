@@ -62,12 +62,7 @@ public class CountryGraph extends JComponent {
 			}
 		}
 		
-		if (drawNumber) {
-			AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
-
-			Font f = new Font("Arial", Font.BOLD, 12);
-			g.setFont(f.deriveFont(at));
-		}
+		
 
 		// draw lines and flags
 		for (int i = 0; i < countries.size(); i++) {
@@ -87,8 +82,13 @@ public class CountryGraph extends JComponent {
 			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
 
 			if (drawNumber) {
+				AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
+				Font f = new Font("Arial", Font.BOLD, 12);
+				g.setFont(value < 20 ? f : f.deriveFont(at));
+					
+				
 				g.setColor(colors.getTextColor());
-				g.drawString(country.getNumber() + "", x + 10, this.getHeight() - value + 25);
+				g.drawString(country.getNumber() + "", value < 20 ? x + 2 : x + 10, value < 20 ? this.getHeight() - value - 17: this.getHeight() - value + 25);
 			}
 		}
 

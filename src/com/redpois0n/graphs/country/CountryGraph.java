@@ -20,10 +20,25 @@ public class CountryGraph extends JComponent {
 
 	private final List<Country> countries = new ArrayList<Country>();
 
+	/**
+	 * Colors
+	 */
 	private ICountryColors colors;
-
+	
+	/**
+	 * TODO
+	 * Shows the country code
+	 */
 	private boolean showIso2 = true;
+	
+	/**
+	 * Shows the number
+	 */
 	private boolean drawNumber = true;
+	
+	/**
+	 * Is active
+	 */
 	private boolean isActive = true;
 
 	public CountryGraph(ICountryColors colors) {
@@ -97,10 +112,18 @@ public class CountryGraph extends JComponent {
 		onUpdate(countries, 15 + countries.size() * 20);
 	}
 
+	/**
+	 * Called when this component updates
+	 * @param sortedList sorted country list
+	 * @param recommendedX recommended width
+	 */
 	public void onUpdate(List<Country> sortedList, int recommendedX) {
 
 	}
 	
+	/**
+		When component is active
+	**/
 	public void setActive(boolean b) {
 		isActive = b;
 	}
@@ -109,6 +132,10 @@ public class CountryGraph extends JComponent {
 		return isActive;
 	}
 
+	/**
+	 * Adds a country to the list
+	 * @param country
+	 */
 	public void add(Country country) {
 		for (int i = 0; i < countries.size(); i++) {
 			Country old = countries.get(i);
@@ -125,10 +152,12 @@ public class CountryGraph extends JComponent {
 		countries.remove(country);
 	}
 
+	// TODO
 	public boolean isShowIso2() {
 		return showIso2;
 	}
 
+	// TODO
 	public void setShowIso2(boolean showIso2) {
 		this.showIso2 = showIso2;
 	}

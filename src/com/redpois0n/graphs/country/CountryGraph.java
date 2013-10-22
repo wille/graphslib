@@ -3,6 +3,10 @@ package com.redpois0n.graphs.country;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -11,7 +15,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
 
 import com.redpois0n.DesignMode;
 
@@ -43,6 +49,39 @@ public class CountryGraph extends JComponent {
 
 	public CountryGraph(ICountryColors colors) {
 		this.colors = colors;
+		
+		final JPopupMenu popup = new JPopupMenu();
+		
+		this.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	
+		final JCheckBoxMenuItem toggleNumber = new JCheckBoxMenuItem("Draw number", true);
+		toggleNumber.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				drawNumber = toggleNumber.isSelected();
+				repaint();
+			}
+		});
+		
+		popup.add(toggleNumber);
+		
+		this.add(popup);
 	}
 
 	@Override

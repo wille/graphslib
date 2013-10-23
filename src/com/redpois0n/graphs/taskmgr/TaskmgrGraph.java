@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import com.redpois0n.DesignMode;
-
 
 @SuppressWarnings("serial")
 public class TaskmgrGraph extends JComponent {
@@ -60,9 +58,6 @@ public class TaskmgrGraph extends JComponent {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		if (DesignMode.DESIGNERMODE) {
-			return;
-		}
 		if (values.size() > MAXIMUM_VALUES) {
 			for (int i = 0; i < MAXIMUM_VALUES / 10; i++) {
 				values.remove(0);

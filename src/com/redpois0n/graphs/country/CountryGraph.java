@@ -19,8 +19,6 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 
-import com.redpois0n.DesignMode;
-
 @SuppressWarnings("serial")
 public class CountryGraph extends JComponent {
 
@@ -85,11 +83,7 @@ public class CountryGraph extends JComponent {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-		if (DesignMode.DESIGNERMODE) {
-			return;
-		}
-		
+	public void paintComponent(Graphics g) {	
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);

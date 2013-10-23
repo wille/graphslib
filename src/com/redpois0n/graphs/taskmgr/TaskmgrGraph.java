@@ -121,7 +121,8 @@ public class TaskmgrGraph extends JComponent {
 			if (x == 16) {
 				x = 17;
 			}
-			for (int y = 0; y < this.getHeight() - 30; y++) {
+			liney = 0;
+			for (int y = x >= 17 ? 0 : -1; y < this.getHeight() - 30; y++) {
 
 				if (liney++ == 1) {
 					y += 2;
@@ -140,8 +141,6 @@ public class TaskmgrGraph extends JComponent {
 
 		// draw meter percent
 		value = getLastValue();
-		System.out.println("Value: " + value + ", Maximum: " + maximum);
-		g.setColor(colors.getCurveColor());
 
 		int todraw = (int) (((float) value / (float) maximum) * (this.getHeight() - 33));
 		int drawn = 0;
@@ -155,14 +154,21 @@ public class TaskmgrGraph extends JComponent {
 
 				liney = -1;
 
-				for (int y = this.getHeight() - 33; y > 2 && drawn * 2 < todraw; y--) {
+				for (int y = this.getHeight() - 32; y > 2 && drawn * 2 < todraw; y--) {
 					drawn++;
 
 					if (liney++ == 1) {
 						y -= 2;
 						liney = 0;
 					}
-
+					
+					g.setColor(colors.getInnerFillColor());
+					
+					g.drawRect(17, 7 + y, 15, 1);
+					g.drawRect(34, 7 + y, 16, 1);
+					
+					g.setColor(colors.getCurveColor());
+					
 					g.drawRect(17, 8 + y, 15, 0);
 					g.drawRect(34, 8 + y, 16, 0);
 
@@ -173,8 +179,8 @@ public class TaskmgrGraph extends JComponent {
 
 		// cover up some shit
 		g.setColor(colors.getInnerFillColor());
-		g.drawRect(1, this.getHeight() - 23, 60, 1);
-		g.drawRect(1, 6, 60, 1);
+		g.fillRect(1, this.getHeight() - 22, 60, 4);
+		g.fillRect(1, 6, 60, 3);
 
 		// draw text
 		g.setColor(colors.getCurveColor());

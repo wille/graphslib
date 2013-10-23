@@ -220,6 +220,10 @@ public class TaskmgrGraph extends JComponent {
 	public void dispose() {
 		running = false;
 	}
+	
+	public boolean isRunning() {
+		return running;
+	}
 
 	class RepaintThread extends Thread {
 

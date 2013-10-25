@@ -212,6 +212,14 @@ public class CountryGraph extends JComponent {
 		countries.clear();
 	}
 	
+	public ICountryColors getColors() {
+		return colors;
+	}
+
+	public void setColors(ICountryColors colors) {
+		this.colors = colors;
+	}
+
 	public static Color getMainColor(ImageIcon icon) {
 		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
 

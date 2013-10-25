@@ -51,9 +51,16 @@ public class TaskmgrGraph extends JComponent {
 	private boolean running = true;
 	
 	public TaskmgrGraph() {
+		this(true);
+	}
+	
+	public TaskmgrGraph(boolean repaintThread) {
 		this.colors = new TaskmgrColors();
-		new RepaintThread().start();
 		values.add(0);
+		
+		if (repaintThread) {
+			new RepaintThread().start();
+		}
 	}
 
 	public TaskmgrGraph(ITaskmgrColors colors) {
@@ -229,6 +236,14 @@ public class TaskmgrGraph extends JComponent {
 	
 	public boolean isRunning() {
 		return running;
+	}
+
+	public ITaskmgrColors getColors() {
+		return colors;
+	}
+
+	public void setColors(ITaskmgrColors colors) {
+		this.colors = colors;
 	}
 
 	class RepaintThread extends Thread {

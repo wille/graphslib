@@ -23,7 +23,7 @@ public class TaskmgrGraph extends JComponent {
 	/**
 	 * Colors to use
 	 */
-	private final ITaskmgrColors colors;
+	private ITaskmgrColors colors;
 	
 	/**
 	 * Where valued are saved to be drawn
@@ -49,11 +49,16 @@ public class TaskmgrGraph extends JComponent {
 	 * Is this component still active
 	 */
 	private boolean running = true;
-
-	public TaskmgrGraph(ITaskmgrColors colors) {
-		this.colors = colors;
+	
+	public TaskmgrGraph() {
+		this.colors = new TaskmgrColors();
 		new RepaintThread().start();
 		values.add(0);
+	}
+
+	public TaskmgrGraph(ITaskmgrColors colors) {
+		this();
+		this.colors = colors;
 	}
 
 	@Override

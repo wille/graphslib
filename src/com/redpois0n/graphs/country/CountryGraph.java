@@ -44,9 +44,9 @@ public class CountryGraph extends JComponent {
 	 * Is active
 	 */
 	private boolean isActive = true;
-
-	public CountryGraph(ICountryColors colors) {
-		this.colors = colors;
+	
+	public CountryGraph() {
+		this.colors = new CountryColors();
 		
 		final JPopupMenu popup = new JPopupMenu();
 		
@@ -80,6 +80,11 @@ public class CountryGraph extends JComponent {
 		popup.add(toggleNumber);
 		
 		this.add(popup);
+	}
+
+	public CountryGraph(ICountryColors colors) {
+		this();
+		this.colors = colors;		
 	}
 
 	@Override

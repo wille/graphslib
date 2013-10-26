@@ -1,15 +1,16 @@
 package com.redpois0n.graphs.taskmgr;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
 
-
 @SuppressWarnings("serial")
 public class TaskmgrGraph extends JComponent {
-	
+
 	/**
 	 * Time between ticks in ms
 	 */
@@ -19,12 +20,12 @@ public class TaskmgrGraph extends JComponent {
 	 * Maximum values saved in memory
 	 */
 	public static final int MAXIMUM_VALUES = 1000;
-	
+
 	/**
 	 * Colors to use
 	 */
 	private ITaskmgrColors colors;
-	
+
 	/**
 	 * Where valued are saved to be drawn
 	 */
@@ -34,7 +35,7 @@ public class TaskmgrGraph extends JComponent {
 	 * Current position to draw net at
 	 */
 	private int position = 9;
-	
+
 	/**
 	 * Text to draw
 	 */
@@ -44,20 +45,20 @@ public class TaskmgrGraph extends JComponent {
 	 * Max is 100 by default, 0 minimum
 	 */
 	private int maximum = 100;
-	
+
 	/**
 	 * Is this component still active
 	 */
 	private boolean running = true;
-	
+
 	public TaskmgrGraph() {
 		this(true);
 	}
-	
+
 	public TaskmgrGraph(boolean repaintThread) {
 		this.colors = new TaskmgrColors();
 		values.add(0);
-		
+
 		if (repaintThread) {
 			new RepaintThread().start();
 		}
@@ -67,7 +68,7 @@ public class TaskmgrGraph extends JComponent {
 		this();
 		this.colors = colors;
 	}
-	
+
 	public TaskmgrGraph(ITaskmgrColors colors, boolean repaintThread) {
 		this(repaintThread);
 		this.colors = colors;
@@ -112,6 +113,11 @@ public class TaskmgrGraph extends JComponent {
 		g.setColor(colors.getCurveColor());
 		int index = values.size() - 1;
 		int value = 0;
+
+		// set line thickness
+
+		((Graphics2D) g).setStroke(new BasicStroke(2));
+
 		for (int i = this.getWidth() - 3; i > 71; i--) {
 			if (index > 0) {
 				int latest = value;
@@ -131,6 +137,9 @@ public class TaskmgrGraph extends JComponent {
 			}
 		}
 
+		// revert line thickness
+		((Graphics2D) g).setStroke(new BasicStroke(1));
+
 		// draw blocks in left meter
 		int liney = 0;
 		for (int x = 0; x < 34; x++) {
@@ -145,7 +154,7 @@ public class TaskmgrGraph extends JComponent {
 					y += 2;
 					liney = 0;
 				}
-				
+
 				if ((x + y) % 2 == 1) {
 					g.setColor(colors.getGreenMeterColor());
 				} else {
@@ -178,14 +187,14 @@ public class TaskmgrGraph extends JComponent {
 						y -= 2;
 						liney = 0;
 					}
-					
+
 					g.setColor(colors.getInnerFillColor());
-					
+
 					g.drawRect(17, 7 + y, 15, 1);
 					g.drawRect(34, 7 + y, 16, 1);
-					
+
 					g.setColor(colors.getCurveColor());
-					
+
 					g.drawRect(17, 8 + y, 15, 0);
 					g.drawRect(34, 8 + y, 16, 0);
 
@@ -234,11 +243,11 @@ public class TaskmgrGraph extends JComponent {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 	public void dispose() {
 		running = false;
 	}
-	
+
 	public boolean isRunning() {
 		return running;
 	}

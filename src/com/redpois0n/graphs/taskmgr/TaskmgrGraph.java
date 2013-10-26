@@ -67,6 +67,11 @@ public class TaskmgrGraph extends JComponent {
 		this();
 		this.colors = colors;
 	}
+	
+	public TaskmgrGraph(ITaskmgrColors colors, boolean repaintThread) {
+		this(repaintThread);
+		this.colors = colors;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {

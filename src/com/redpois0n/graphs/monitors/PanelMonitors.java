@@ -183,7 +183,7 @@ public class PanelMonitors extends JPanel {
 			} else if (selected != null && selected.equals(monitor)) {
 				icon = (ImageIcon) IconUtils.getIcon("monitor_selected");
 			} else {
-				icon = (ImageIcon) IconUtils.getIcon("monitor");
+				icon = (ImageIcon) IconUtils.getIcon("monitor_normal");
 			}
 			
 			g2.drawImage(icon.getImage(), 0, 0, super.getWidth(), super.getHeight(), null);

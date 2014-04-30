@@ -2,6 +2,7 @@ package com.redpois0n.graphs.monitors;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -50,7 +51,8 @@ public class PanelMonitors extends JPanel {
 		int highestY = 0;
 		
 		Location lowest = MonitorUtils.getLowestLocations(monitors);
-		
+		Location highest = MonitorUtils.getHighestLocations(monitors);
+
 		for (int i = 0; i < monitors.length; i++) {
 			RemoteMonitor monitor = monitors[i];
 			
@@ -79,6 +81,13 @@ public class PanelMonitors extends JPanel {
 			add(panel);
 			panels.add(panel);
 		}
+		
+		System.out.println(highest.x + ", " + highest.y + " " + lowest.x + ", " + lowest.y);
+		
+		Dimension d = new Dimension(highest.x / 20 + 100, highest.y / 20 + 100);
+		
+		super.setPreferredSize(d);
+		super.setSize(d);
 	}
 
 	public void addListener(MonitorListener listener) {

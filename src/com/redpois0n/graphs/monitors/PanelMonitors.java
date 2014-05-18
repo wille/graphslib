@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -24,6 +25,7 @@ public class PanelMonitors extends JPanel {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 	private List<PanelMonitor> panels = new ArrayList<PanelMonitor>();
 	private boolean draggable;
+	private Image thumbnail;
 	
 	public PanelMonitors(RemoteMonitor[] m, boolean draggable) {
 		this.monitors = m;
@@ -125,6 +127,15 @@ public class PanelMonitors extends JPanel {
 		return panels;
 	}
 
+	public Image getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(Image thumbnail) {
+		this.thumbnail = thumbnail;
+		repaint();
+	}
+
 	public class PanelMonitor extends JPanel {
 
 		private int x;
@@ -195,12 +206,20 @@ public class PanelMonitors extends JPanel {
 				icon = (ImageIcon) IconUtils.getIcon("monitor_normal");
 			}
 			
-			g2.drawImage(icon.getImage(), 0, 0, super.getWidth(), super.getHeight(), null);
+			Image image = icon.getImage();
 			
-			g2.setColor(Color.white);
-			Font f = new Font("Arial", Font.BOLD, 24);
-			g2.setFont(f);
-			g2.drawString(number + "", getWidth() / 2 - 6, getHeight() / 2 + 8);
+			if (thumbnail != null) {
+				image = thumbnail;
+			}
+			
+			g2.drawImage(image, 0, 0, super.getWidth(), super.getHeight(), null);
+			
+			if (thumbnail == null) {
+				g2.setColor(Color.white);
+				Font f = new Font("Arial", Font.BOLD, 24);
+				g2.setFont(f);
+				g2.drawString(number + "", getWidth() / 2 - 6, getHeight() / 2 + 8);
+			}
 		}
 		
 	}

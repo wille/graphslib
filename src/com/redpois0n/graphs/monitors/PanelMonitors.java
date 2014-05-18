@@ -25,7 +25,6 @@ public class PanelMonitors extends JPanel {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 	private List<PanelMonitor> panels = new ArrayList<PanelMonitor>();
 	private boolean draggable;
-	private Image thumbnail;
 	
 	public PanelMonitors(RemoteMonitor[] m, boolean draggable) {
 		this.monitors = m;
@@ -127,15 +126,6 @@ public class PanelMonitors extends JPanel {
 		return panels;
 	}
 
-	public Image getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(Image thumbnail) {
-		this.thumbnail = thumbnail;
-		repaint();
-	}
-
 	public class PanelMonitor extends JPanel {
 
 		private int x;
@@ -143,6 +133,8 @@ public class PanelMonitors extends JPanel {
 		private int number;
 		
 		private RemoteMonitor monitor;
+		
+		private Image thumbnail;
 		
 		public PanelMonitor(RemoteMonitor m, int number) {
 			this.monitor = m;
@@ -220,6 +212,15 @@ public class PanelMonitors extends JPanel {
 				g2.setFont(f);
 				g2.drawString(number + "", getWidth() / 2 - 6, getHeight() / 2 + 8);
 			}
+		}
+
+		public Image getThumbnail() {
+			return thumbnail;
+		}
+
+		public void setThumbnail(Image thumbnail) {
+			this.thumbnail = thumbnail;
+			repaint();
 		}
 		
 	}

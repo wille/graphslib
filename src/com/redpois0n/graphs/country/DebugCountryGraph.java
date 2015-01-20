@@ -11,12 +11,9 @@ public class DebugCountryGraph {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setLayout(null);
 		
 		final CountryGraph graph = new CountryGraph(new CountryColors());
-		
-		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
-		
+				
 		frame.add(graph);
 		
 		frame.setVisible(true);

@@ -14,12 +14,9 @@ public class DebugTaskmgrGraph {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setLayout(null);
 		
 		final TaskmgrGraph graph = new TaskmgrGraph(new TaskmgrColors());
-		
-		graph.setBounds(1, 1, frame.getWidth() - 20, frame.getHeight() - 45);
-		
+				
 		new Thread("Memory thread") {
 			@Override
 			public void run() {

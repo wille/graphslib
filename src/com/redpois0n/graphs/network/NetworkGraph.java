@@ -116,26 +116,38 @@ public class NetworkGraph extends JComponent {
 
 		((Graphics2D) g).setStroke(new BasicStroke(2));
 
-		int latestI = 0;
-		int drawValue = 0;
+		int latestUp = 0;
+		int latestDown = 0;
+		int drawValueUp = 0;
+		int drawValueDown = 0;
 
-		for (int i = this.getWidth() - 3; i > 71; i--) {
+		for (int i = this.getWidth() - 3; i > 0; i--) {
 			if (index > 0) {
 				ValuePair latest = value;
 				value = valuePairs.get(index--);
 
-				drawValue = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
+				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
+				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * this.getHeight());
 
 				if (latest.getUp() == 0) {
-					latestI = drawValue;
+					latestUp = drawValueUp;
+				}
+				
+				if (latest.getDown() == 0) {
+					latestDown = drawValueDown;
 				}
 
 				g.setColor(colors.getUploadColor());
-				g.drawLine(i, this.getHeight() - drawValue, i + 5, this.getHeight() - latestI);
-
-				latestI = drawValue;
+				//g.drawLine(i, this.getHeight() - drawValue, i + 5, this.getHeight() - drawValue );
+				g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
 				
-				i -= 3;
+				g.setColor(colors.getDownloadColor());
+				
+				g.fillRect(i, this.getHeight() - drawValueDown, 10, this.getHeight());
+				
+				latestUp = drawValueUp;
+				latestDown = drawValueDown;
+				i -= 10;
 			} else {
 				break;
 			}

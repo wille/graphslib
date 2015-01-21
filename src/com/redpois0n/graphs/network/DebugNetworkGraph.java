@@ -10,7 +10,7 @@ public class DebugNetworkGraph {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(1000, 750);
+		frame.setSize(600, 300);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

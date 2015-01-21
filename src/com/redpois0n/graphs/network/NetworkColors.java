@@ -6,12 +6,12 @@ public class NetworkColors implements INetworkColors {
 
 	@Override
 	public Color getInnerFillColor() {
-		return Color.black;
+		return Color.white;
 	}
 
 	@Override
 	public Color getBorderColor() {
-		return Color.white;
+		return Color.gray;
 	}
 
 	@Override

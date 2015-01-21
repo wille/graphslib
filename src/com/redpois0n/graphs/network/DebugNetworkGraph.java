@@ -21,11 +21,9 @@ public class DebugNetworkGraph {
 			public void run() {
 				int lastUp = 0;
 				int lastDown = 0;
-				while (true) {				
-					graph.setMaximum(10000);
-					
-					lastUp = (new Random()).nextInt(1000);
-					lastDown = (new Random()).nextInt(5000);
+				while (true) {									
+					lastUp = (new Random()).nextInt((int) Math.pow(1024, 3) / 2);
+					lastDown = (new Random()).nextInt((int) Math.pow(1024, 4));
 					
 					graph.addValues(lastUp, lastDown);
 														

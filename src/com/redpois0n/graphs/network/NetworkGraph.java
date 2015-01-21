@@ -45,7 +45,7 @@ public class NetworkGraph extends JComponent {
 	/**
 	 * Max is 100 by default, 0 minimum
 	 */
-	private int maximum = 10000;
+	private int maximum = 100;
 
 	/**
 	 * Is this component still active
@@ -86,13 +86,25 @@ public class NetworkGraph extends JComponent {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-		if (valuePairs.size() > MAXIMUM_VALUES) {
-			for (int i = 0; i < MAXIMUM_VALUES / 10; i++) {
-				valuePairs.remove(0);
-			}
+	public void paintComponent(Graphics g) { 
+		while (valuePairs.size() > this.getWidth() / 10) {
+			valuePairs.remove(0);
 		}
 
+		int max = 0;
+		
+		for (ValuePair vp : valuePairs) {
+			if (vp.getDown() > max) {
+				max = vp.getDown();
+			}
+			
+			if (vp.getUp() > max) {
+				max = vp.getUp();
+			}
+		}
+		
+		setMaximum(max);
+		
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
@@ -105,8 +117,8 @@ public class NetworkGraph extends JComponent {
 
 		// draw lines
 		for (int p = 0; p < this.getWidth(); p += 13) {
-			g.drawLine(71, p, this.getWidth() - 1, p);
-			g.drawLine(71 + p + position, 2, 71 + p + position, this.getHeight());
+			g.drawLine(1, p, this.getWidth() - 1, p);
+			g.drawLine(1 + p + position, 2, 71 + p + position, this.getHeight());
 		}
 
 		// reset pos
@@ -116,8 +128,7 @@ public class NetworkGraph extends JComponent {
 
 		// draw background rectangles
 		g.setColor(colors.getBorderColor());
-		g.drawRect(0, 0, 68, this.getHeight());
-		g.drawRect(71, 0, this.getWidth(), this.getHeight());
+		g.drawRect(0, 0, this.getWidth(), this.getHeight());
 
 		// draw main curve
 		int index = valuePairs.size() - 1;
@@ -164,11 +175,6 @@ public class NetworkGraph extends JComponent {
 				break;
 			}
 		}
-
-		// cover up some shit
-		g.setColor(colors.getInnerFillColor());
-		g.fillRect(1, this.getHeight() - 22, 60, 4);
-		g.fillRect(1, 6, 60, 3);
 
 		// draw text
 	//	g.setColor(colors.getCurveColor());

@@ -1,5 +1,6 @@
 package com.redpois0n.graphs.network;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -108,6 +109,11 @@ public class NetworkGraph extends JComponent {
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
+		
+		g.setColor(Color.gray);
+		for (int i = 0; i < this.getHeight(); i++) {
+			g.drawLine(0, i * 50, this.getWidth(), i * 50);
+		}
 
 		// decrease pos
 		position -= 3;
@@ -126,6 +132,7 @@ public class NetworkGraph extends JComponent {
 		// set line thickness
 
 		((Graphics2D) g).setStroke(new BasicStroke(2));
+        ((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
 
 		int latestUp = 0;
 		int latestDown = 0;

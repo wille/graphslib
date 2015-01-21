@@ -88,7 +88,7 @@ public class NetworkGraph extends JComponent {
 
 	@Override
 	public void paintComponent(Graphics g) { 
-		while (valuePairs.size() > this.getWidth() / 10) {
+		while (valuePairs.size() > (this.getWidth() - 50) / 10) {
 			valuePairs.remove(0);
 		}
 
@@ -105,20 +105,23 @@ public class NetworkGraph extends JComponent {
 		}
 		
 		setMaximum(max);
+		System.out.println(max);
 		
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 		
-		g.setColor(Color.gray);
+		// draw grid
+		g.setColor(colors.getGridColor());
 		int lines;
 		for (lines = 0; lines * 50 < this.getHeight(); lines++) {
 			g.drawLine(0, lines * 50, this.getWidth(), lines * 50);
 		}
 
+		// draw data size strings
 		for (int i = 0; i < lines; i++) {
 			int part = max / lines;
-			int what = max - (part * i);
+			int what = max - (part * (i + 1));
 			g.drawString(what + "", 5, i * 50 - 5);
 		}
 		
@@ -145,7 +148,7 @@ public class NetworkGraph extends JComponent {
 		int drawValueUp = 0;
 		int drawValueDown = 0;
 
-		for (int i = this.getWidth() - 3; i > 0; i--) {
+		for (int i = this.getWidth() - 3; i > 50; i--) {
 			if (index > 0) {
 				ValuePair latest = value;
 				value = valuePairs.get(index--);

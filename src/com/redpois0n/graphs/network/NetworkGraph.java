@@ -109,26 +109,16 @@ public class NetworkGraph extends JComponent {
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 
-		// draw meter squares
-		g.setColor(new Color(0x000000));
-
 		// decrease pos
 		position -= 3;
-
-		// draw lines
-		for (int p = 0; p < this.getWidth(); p += 13) {
-			g.drawLine(1, p, this.getWidth() - 1, p);
-			g.drawLine(1 + p + position, 2, 71 + p + position, this.getHeight());
-		}
 
 		// reset pos
 		if (position == 0) {
 			position = 9;
 		}
+		
+		
 
-		// draw background rectangles
-		g.setColor(colors.getBorderColor());
-		g.drawRect(0, 0, this.getWidth(), this.getHeight());
 
 		// draw main curve
 		int index = valuePairs.size() - 1;
@@ -177,9 +167,14 @@ public class NetworkGraph extends JComponent {
 		}
 
 		// draw text
-	//	g.setColor(colors.getCurveColor());
+		//	g.setColor(colors.getCurveColor());
 		//g.drawString(text, 17, this.getHeight() - 10);
 
+
+		// draw background rectangles
+		g.setColor(colors.getBorderColor());
+		g.drawRect(0, 0, this.getWidth(), this.getHeight());
+		
 		g.dispose();
 
 	}

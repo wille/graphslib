@@ -62,6 +62,11 @@ public class NetworkGraph extends JComponent {
 	 * Show download bars
 	 */
 	private boolean showDown = true;
+	
+	/**
+	 * Grids to show
+	 */
+	private int grids = 5;
 
 	public NetworkGraph() {
 		this(true);
@@ -113,14 +118,14 @@ public class NetworkGraph extends JComponent {
 		
 		// draw grid
 		g.setColor(colors.getGridColor());
-		for (int i = 0; i < this.getHeight(); i += this.getHeight() / 5) {
+		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
 			g.drawLine(0, i, this.getWidth(), i);
 		}
 
 		// draw data size strings
 		int lineNumber = 0;
-		for (int i = 0; i < this.getHeight(); i += this.getHeight() / 5) {
-			int part = max / 5;
+		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
+			int part = max / grids;
 			int what = max - (part * (lineNumber++));
 			g.drawString(what + "", 5, i + 15);
 		}
@@ -251,6 +256,14 @@ public class NetworkGraph extends JComponent {
 
 	public void setDrawDownloadBars(boolean showDown) {
 		this.showDown = showDown;
+	}
+
+	public int getGrids() {
+		return grids;
+	}
+
+	public void setGrids(int grids) {
+		this.grids = grids;
 	}
 
 	class RepaintThread extends Thread {

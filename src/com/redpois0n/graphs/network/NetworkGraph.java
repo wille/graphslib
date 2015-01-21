@@ -45,12 +45,22 @@ public class NetworkGraph extends JComponent {
 	/**
 	 * Max is 100 by default, 0 minimum
 	 */
-	private int maximum = 100;
+	private int maximum = 10000;
 
 	/**
 	 * Is this component still active
 	 */
 	private boolean running = true;
+	
+	/**
+	 * Show upload bars
+	 */
+	private boolean showUp = true;
+	
+	/**
+	 * Show download bars
+	 */
+	private boolean showDown = true;
 
 	public NetworkGraph() {
 		this(true);
@@ -137,13 +147,15 @@ public class NetworkGraph extends JComponent {
 					latestDown = drawValueDown;
 				}
 
-				g.setColor(colors.getUploadColor());
-				//g.drawLine(i, this.getHeight() - drawValue, i + 5, this.getHeight() - drawValue );
-				g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
+				if (drawUploadBars()) {
+					g.setColor(colors.getDownloadColor());
+					g.fillRect(i, this.getHeight() - drawValueDown, 10, this.getHeight());
+				}
 				
-				g.setColor(colors.getDownloadColor());
-				
-				g.fillRect(i, this.getHeight() - drawValueDown, 10, this.getHeight());
+				if (drawDownloadBars()) {
+					g.setColor(colors.getUploadColor());
+					g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
+				}
 				
 				latestUp = drawValueUp;
 				latestDown = drawValueDown;
@@ -208,6 +220,22 @@ public class NetworkGraph extends JComponent {
 
 	public void setColors(INetworkColors colors) {
 		this.colors = colors;
+	}
+
+	public boolean drawUploadBars() {
+		return showUp;
+	}
+
+	public void setDrawUploadBars(boolean showUp) {
+		this.showUp = showUp;
+	}
+
+	public boolean drawDownloadBars() {
+		return showDown;
+	}
+
+	public void setDrawDownloadBars(boolean showDown) {
+		this.showDown = showDown;
 	}
 
 	class RepaintThread extends Thread {

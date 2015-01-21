@@ -127,7 +127,7 @@ public class NetworkGraph extends JComponent {
 		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
 			int part = max / grids;
 			int what = max - (part * (lineNumber++));
-			g.drawString(what + "", 5, i + 15);
+			g.drawString(DataUnits.getAsString(what) + "", 5, i + 15);
 		}
 		
 		// decrease pos
@@ -151,7 +151,7 @@ public class NetworkGraph extends JComponent {
 		int drawValueUp = 0;
 		int drawValueDown = 0;
 
-		for (int i = this.getWidth() - 3; i > 50; i--) {
+		for (int i = this.getWidth() - 11; i > 50; i--) {
 			if (index > 0) {
 				ValuePair latest = value;
 				value = valuePairs.get(index--);
@@ -176,7 +176,7 @@ public class NetworkGraph extends JComponent {
 					g.setColor(colors.getUploadColor());
 					g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
 				}
-				
+					
 				latestUp = drawValueUp;
 				latestDown = drawValueDown;
 				i -= 10;

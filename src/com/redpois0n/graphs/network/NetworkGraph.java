@@ -111,9 +111,18 @@ public class NetworkGraph extends JComponent {
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 		
 		g.setColor(Color.gray);
-		for (int i = 0; i < this.getHeight(); i++) {
-			g.drawLine(0, i * 50, this.getWidth(), i * 50);
+		int lines;
+		for (lines = 0; lines * 50 < this.getHeight(); lines++) {
+			g.drawLine(0, lines * 50, this.getWidth(), lines * 50);
 		}
+
+		for (int i = 0; i < lines; i++) {
+			int part = max / lines;
+			int what = max - (part * i);
+			g.drawString(what + "", 5, i * 50 - 5);
+		}
+		
+		g.drawString(max + "", 5, 20);
 
 		// decrease pos
 		position -= 3;
@@ -122,9 +131,6 @@ public class NetworkGraph extends JComponent {
 		if (position == 0) {
 			position = 9;
 		}
-		
-		
-
 
 		// draw main curve
 		int index = valuePairs.size() - 1;

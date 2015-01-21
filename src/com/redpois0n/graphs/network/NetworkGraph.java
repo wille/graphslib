@@ -113,20 +113,18 @@ public class NetworkGraph extends JComponent {
 		
 		// draw grid
 		g.setColor(colors.getGridColor());
-		int lines;
-		for (lines = 0; lines * 50 < this.getHeight(); lines++) {
-			g.drawLine(0, lines * 50, this.getWidth(), lines * 50);
+		for (int i = 0; i < this.getHeight(); i += this.getHeight() / 5) {
+			g.drawLine(0, i, this.getWidth(), i);
 		}
 
 		// draw data size strings
-		for (int i = 0; i < lines; i++) {
-			int part = max / lines;
-			int what = max - (part * (i + 1));
-			g.drawString(what + "", 5, i * 50 - 5);
+		int lineNumber = 0;
+		for (int i = 0; i < this.getHeight(); i += this.getHeight() / 5) {
+			int part = max / 5;
+			int what = max - (part * (lineNumber++));
+			g.drawString(what + "", 5, i + 15);
 		}
 		
-		g.drawString(max + "", 5, 20);
-
 		// decrease pos
 		position -= 3;
 

@@ -28,9 +28,7 @@ public class DebugNetworkGraph {
 					lastDown = (new Random()).nextInt(10000);
 					
 					graph.addValues(lastUp, lastDown);
-					
-					//graph.setText(value + "");
-									
+														
 					try {
 						Thread.sleep(1000L);
 					} catch (Exception e) {

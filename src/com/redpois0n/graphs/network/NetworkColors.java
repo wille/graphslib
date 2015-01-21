@@ -24,4 +24,9 @@ public class NetworkColors implements INetworkColors {
 		return new Color(0x00FF00);
 	}
 	
+	@Override
+	public Color getGridColor() {
+		return Color.gray;
+	}
+	
 }

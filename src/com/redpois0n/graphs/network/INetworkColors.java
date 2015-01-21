@@ -12,4 +12,5 @@ public abstract interface INetworkColors {
 	
 	public abstract Color getUploadColor();
 			
+	public abstract Color getGridColor();
 }

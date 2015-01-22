@@ -2,7 +2,6 @@ package com.redpois0n.graphs.network;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -94,7 +93,11 @@ public class NetworkGraph extends JComponent {
 	@Override
 	public void paintComponent(Graphics g) { 
 		while (valuePairs.size() > (this.getWidth() - 50) / 10) {
-			valuePairs.remove(0);
+			if (valuePairs.size() > 0) {
+				valuePairs.remove(0);
+			} else {
+				break;
+			}
 		}
 
 		int max = 0;

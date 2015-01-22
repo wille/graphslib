@@ -92,9 +92,9 @@ public class NetworkGraph extends JComponent {
 
 	@Override
 	public void paintComponent(Graphics g) { 
-		while (valuePairs.size() > (this.getWidth() - 50) / 10) {
+		while (valuePairs.size() * 11 > this.getWidth() - 50) {
 			if (valuePairs.size() > 0) {
-				valuePairs.remove(0);
+				ValuePair vp = valuePairs.remove(0);
 			} else {
 				break;
 			}
@@ -112,8 +112,11 @@ public class NetworkGraph extends JComponent {
 			}
 		}
 		
+		if (max < 10) {
+			max = 10;
+		}
+		
 		setMaximum(max);
-		System.out.println(max);
 		
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());

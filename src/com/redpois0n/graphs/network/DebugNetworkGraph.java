@@ -24,7 +24,7 @@ public class DebugNetworkGraph {
 				while (true) {									
 					lastUp = (new Random()).nextInt((int) Math.pow(1024, 3) / 2);
 					lastDown = (new Random()).nextInt((int) Math.pow(1024, 4));
-					
+
 					graph.addValues(lastUp, lastDown);
 														
 					try {

@@ -103,11 +103,11 @@ public class NetworkGraph extends JComponent {
 		int max = 0;
 		
 		for (ValuePair vp : valuePairs) {
-			if (vp.getDown() > max) {
+			if (vp.getDown() > max && drawDownloadBars()) {
 				max = vp.getDown();
 			}
 			
-			if (vp.getUp() > max) {
+			if (vp.getUp() > max && drawUploadBars()) {
 				max = vp.getUp();
 			}
 		}
@@ -162,14 +162,16 @@ public class NetworkGraph extends JComponent {
 				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
 				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * this.getHeight());
 				
-				if (drawUploadBars()) {
-					g.setColor(colors.getDownloadColor());
-					g.fillRect(i, this.getHeight() - drawValueDown, 10, this.getHeight());
+				boolean drawDownFirst = drawValueDown > drawValueUp;
+				
+				if (drawDownFirst && drawDownloadBars() || !drawDownFirst && drawUploadBars()) {
+					g.setColor(drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
+					g.fillRect(i, this.getHeight() - (drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
 				}
 				
-				if (drawDownloadBars()) {
-					g.setColor(colors.getUploadColor());
-					g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
+				if (!drawDownFirst && drawDownloadBars() || drawDownFirst && drawUploadBars()) {
+					g.setColor(!drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
+					g.fillRect(i, this.getHeight() - (!drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
 				}
 					
 				i -= 10;

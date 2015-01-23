@@ -4,10 +4,16 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
 
 @SuppressWarnings("serial")
 public class NetworkGraph extends JComponent {
@@ -51,21 +57,26 @@ public class NetworkGraph extends JComponent {
 	 * Is this component still active
 	 */
 	private boolean running = true;
-	
+
 	/**
 	 * Show upload bars
 	 */
 	private boolean showUp = true;
-	
+
 	/**
 	 * Show download bars
 	 */
 	private boolean showDown = true;
-	
+
 	/**
 	 * Grids to show
 	 */
 	private int grids = 5;
+	
+	/**
+	 * Popup menu
+	 */
+	private JPopupMenu popup;
 
 	public NetworkGraph() {
 		this(true);
@@ -74,6 +85,45 @@ public class NetworkGraph extends JComponent {
 	public NetworkGraph(boolean repaintThread) {
 		this.colors = new NetworkColors();
 		valuePairs.add(new ValuePair(0, 0));
+
+		popup = new JPopupMenu();
+
+		this.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+		
+		JCheckBoxMenuItem toggleIncoming = new JCheckBoxMenuItem("Show Incoming", true);
+		toggleIncoming.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setDrawDownloadBars(((JCheckBoxMenuItem)e.getSource()).isSelected());
+			}
+		});
+		
+		JCheckBoxMenuItem toggleOutgoing = new JCheckBoxMenuItem("Show Outgoing", true);
+		toggleIncoming.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setDrawUploadBars(((JCheckBoxMenuItem)e.getSource()).isSelected());
+			}
+		});
+		
+		popup.add(toggleIncoming);
+		popup.add(toggleOutgoing);
 
 		if (repaintThread) {
 			new RepaintThread().start();
@@ -91,7 +141,7 @@ public class NetworkGraph extends JComponent {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) { 
+	public void paintComponent(Graphics g) {
 		while (valuePairs.size() * 11 > this.getWidth() - 50) {
 			if (valuePairs.size() > 0) {
 				valuePairs.remove(0);
@@ -101,27 +151,27 @@ public class NetworkGraph extends JComponent {
 		}
 
 		int max = 0;
-		
+
 		for (ValuePair vp : valuePairs) {
 			if (vp.getDown() > max && drawDownloadBars()) {
 				max = vp.getDown();
 			}
-			
+
 			if (vp.getUp() > max && drawUploadBars()) {
 				max = vp.getUp();
 			}
 		}
-		
+
 		if (max < 10) {
 			max = 10;
 		}
-		
+
 		setMaximum(max);
-		
+
 		// draw inner color
 		g.setColor(colors.getInnerFillColor());
 		g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
-		
+
 		// draw grid
 		g.setColor(colors.getGridColor());
 		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
@@ -135,7 +185,7 @@ public class NetworkGraph extends JComponent {
 			int what = max - (part * (lineNumber++));
 			g.drawString(DataUnits.getAsString(what) + "", 5, i + 15);
 		}
-		
+
 		// decrease pos
 		position -= 3;
 
@@ -150,7 +200,7 @@ public class NetworkGraph extends JComponent {
 		// set line thickness
 
 		((Graphics2D) g).setStroke(new BasicStroke(2));
-        ((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
+		((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
 
 		int drawValueUp = 0;
 		int drawValueDown = 0;
@@ -161,19 +211,19 @@ public class NetworkGraph extends JComponent {
 
 				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
 				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * this.getHeight());
-				
+
 				boolean drawDownFirst = drawValueDown > drawValueUp;
-				
+
 				if (drawDownFirst && drawDownloadBars() || !drawDownFirst && drawUploadBars()) {
 					g.setColor(drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
 					g.fillRect(i, this.getHeight() - (drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
 				}
-				
+
 				if (!drawDownFirst && drawDownloadBars() || drawDownFirst && drawUploadBars()) {
 					g.setColor(!drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
 					g.fillRect(i, this.getHeight() - (!drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
 				}
-					
+
 				i -= 10;
 			} else {
 				break;
@@ -181,14 +231,13 @@ public class NetworkGraph extends JComponent {
 		}
 
 		// draw text
-		//	g.setColor(colors.getCurveColor());
-		//g.drawString(text, 17, this.getHeight() - 10);
-
+		// g.setColor(colors.getCurveColor());
+		// g.drawString(text, 17, this.getHeight() - 10);
 
 		// draw background rectangles
 		g.setColor(colors.getBorderColor());
 		g.drawRect(0, 0, this.getWidth(), this.getHeight());
-		
+
 		g.dispose();
 
 	}
@@ -259,6 +308,14 @@ public class NetworkGraph extends JComponent {
 
 	public void setGrids(int grids) {
 		this.grids = grids;
+	}
+
+	public JPopupMenu getPopupMenu() {
+		return popup;
+	}
+
+	public void setPopupMenu(JPopupMenu popup) {
+		this.popup = popup;
 	}
 
 	class RepaintThread extends Thread {

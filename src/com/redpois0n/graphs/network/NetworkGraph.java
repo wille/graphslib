@@ -94,7 +94,7 @@ public class NetworkGraph extends JComponent {
 	public void paintComponent(Graphics g) { 
 		while (valuePairs.size() * 11 > this.getWidth() - 50) {
 			if (valuePairs.size() > 0) {
-				ValuePair vp = valuePairs.remove(0);
+				valuePairs.remove(0);
 			} else {
 				break;
 			}
@@ -152,27 +152,16 @@ public class NetworkGraph extends JComponent {
 		((Graphics2D) g).setStroke(new BasicStroke(2));
         ((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
 
-		int latestUp = 0;
-		int latestDown = 0;
 		int drawValueUp = 0;
 		int drawValueDown = 0;
 
 		for (int i = this.getWidth() - 11; i > 50; i--) {
 			if (index > 0) {
-				ValuePair latest = value;
 				value = valuePairs.get(index--);
 
 				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
 				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * this.getHeight());
-
-				if (latest.getUp() == 0) {
-					latestUp = drawValueUp;
-				}
 				
-				if (latest.getDown() == 0) {
-					latestDown = drawValueDown;
-				}
-
 				if (drawUploadBars()) {
 					g.setColor(colors.getDownloadColor());
 					g.fillRect(i, this.getHeight() - drawValueDown, 10, this.getHeight());
@@ -183,8 +172,6 @@ public class NetworkGraph extends JComponent {
 					g.fillRect(i, this.getHeight() - drawValueUp, 10, this.getHeight());
 				}
 					
-				latestUp = drawValueUp;
-				latestDown = drawValueDown;
 				i -= 10;
 			} else {
 				break;

@@ -12,7 +12,7 @@ Small library that currently includes
 ![Screenshot](screenshots/taskmgrgraph.png)
 
 
-- **Windows 7 and below task manager remake** - Specialized in showing network usage
+- **Network usage meter** - Specialized in showing network usage
 
 ![Screenshot](screenshots/networkgraph.png)
 

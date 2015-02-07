@@ -3,6 +3,7 @@ package com.redpois0n.graphs.graph;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class GraphEntry {
@@ -20,13 +21,18 @@ public class GraphEntry {
 	public GraphEntry(String display, int number, String path) throws Exception {
 		this.display = display;
 		this.path = path;
-
 		this.icon = loadIcon(display);
 		this.number = number;
 	}
 	
 	public GraphEntry(String display, int number) throws Exception {
 		this(display, number, "/icons/");
+	}
+	
+	public GraphEntry(String display, int number, ImageIcon icon) throws Exception {
+		this.display = display;
+		this.icon = icon;
+		this.number = number;
 	}
 	
 	public String getDisplay() {

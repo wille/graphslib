@@ -1,23 +1,22 @@
-package com.redpois0n.graphs.monitors;
+package com.redpois0n.graphs.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class IconUtils {
 
-	private static final Map<String, Icon> CACHE = new HashMap<String, Icon>();
+	private static final Map<String, ImageIcon> CACHE = new HashMap<String, ImageIcon>();
 
-	public static final Icon NO_ICON;
+	public static final ImageIcon NO_ICON;
 
 	static {
 		NO_ICON = getIcon("404");
 	}
 
-	public static Icon getIcon(String path) {
-		Icon icon = null;
+	public static ImageIcon getIcon(String path) {
+		ImageIcon icon = null;
 
 		if (CACHE.containsKey(path)) {
 			icon = CACHE.get(path);

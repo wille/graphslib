@@ -16,6 +16,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.redpois0n.graphs.utils.IconUtils;
+
 @SuppressWarnings("serial")
 public class PanelMonitors extends JPanel {
 

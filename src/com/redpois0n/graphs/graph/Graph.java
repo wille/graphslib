@@ -30,12 +30,6 @@ public class Graph extends JComponent {
 	private IGraphColors colors;
 	
 	/**
-	 * TODO
-	 * Shows the country code
-	 */
-	private boolean showIso2 = true;
-	
-	/**
 	 * Shows the number
 	 */
 	private boolean drawNumber = true;
@@ -188,16 +182,6 @@ public class Graph extends JComponent {
 
 	public void remove(GraphEntry country) {
 		countries.remove(country);
-	}
-
-	// TODO
-	public boolean isShowIso2() {
-		return showIso2;
-	}
-
-	// TODO
-	public void setShowIso2(boolean showIso2) {
-		this.showIso2 = showIso2;
 	}
 
 	public boolean isDrawNumber() {

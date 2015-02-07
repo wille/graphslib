@@ -3,7 +3,6 @@ package com.redpois0n.graphs.graph;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class GraphEntry {

@@ -114,7 +114,7 @@ public class Graph extends JComponent {
 		// draw lines and flags
 		int pos = 0;
 		
-		for (int i = countries.size() - 1; i >= 0; i--) {
+		for (int i = countries.size() - 1; i >= 0 && i < countries.size(); i--) {
 			GraphEntry country = countries.get(i);
 
 			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;

@@ -134,7 +134,7 @@ public class Graph extends JComponent {
 			g.fillRect(x, this.getHeight() - value - 10, 10, this.getHeight());
 
 			if (drawBackgroundSquare) {
-				g.setColor(Color.white);
+				g.setColor(colors.getInnerFillColor());
 				g.fillRect(x - 3, this.getHeight() - value - 14, 16, 16);
 			}
 			g.drawImage(entry.getIcon().getImage(), x - 3, this.getHeight() - value - 14, entry.getIcon().getIconWidth(), entry.getIcon().getIconHeight(), null);

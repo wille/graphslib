@@ -1,5 +1,6 @@
 package com.redpois0n.graphs.graph;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,18 +11,16 @@ public class GraphEntry {
 	public static final Map<String, ImageIcon> ICON_CACHE = new HashMap<String, ImageIcon>();
 	
 	private String path;
-	
-	private final ImageIcon icon;
-	
+	private final ImageIcon icon;	
 	private final String display;
-	
 	private int number;
+	private Color numberColor;
 	
 	public GraphEntry(String display, int number, String path) throws Exception {
 		this.display = display;
+		this.number = number;
 		this.path = path;
 		this.icon = loadIcon(display);
-		this.number = number;
 	}
 	
 	public GraphEntry(String display, int number) throws Exception {
@@ -30,8 +29,8 @@ public class GraphEntry {
 	
 	public GraphEntry(String display, int number, ImageIcon icon) throws Exception {
 		this.display = display;
-		this.icon = icon;
 		this.number = number;
+		this.icon = icon;
 	}
 	
 	public String getDisplay() {
@@ -48,6 +47,14 @@ public class GraphEntry {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public Color getNumberColor() {
+		return numberColor;
+	}
+
+	public void setNumberColor(Color numberColor) {
+		this.numberColor = numberColor;
 	}
 
 	public ImageIcon loadIcon(String iconName) throws Exception {

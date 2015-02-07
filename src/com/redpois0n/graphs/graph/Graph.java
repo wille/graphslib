@@ -22,7 +22,7 @@ import javax.swing.JPopupMenu;
 @SuppressWarnings("serial")
 public class Graph extends JComponent {
 
-	private final List<GraphEntry> countries = new ArrayList<GraphEntry>();
+	private final List<GraphEntry> entries = new ArrayList<GraphEntry>();
 
 	/**
 	 * Colors
@@ -38,6 +38,11 @@ public class Graph extends JComponent {
 	 * Is active
 	 */
 	private boolean isActive = true;
+	
+	/**
+	 * 
+	 */
+	private boolean drawBackgroundSquare = false;
 	
 	public Graph() {
 		this.colors = new GraphColors();
@@ -94,15 +99,15 @@ public class Graph extends JComponent {
 		int max = 0;
 
 		// sort countries
-		Collections.sort(countries, new Comparator<GraphEntry>() {
+		Collections.sort(entries, new Comparator<GraphEntry>() {
 			public int compare(GraphEntry country, GraphEntry country1) {
 				return country.getNumber() - country1.getNumber();
 			}
 		});
 
 		// get highest
-		for (int i = 0; i < countries.size(); i++) {
-			GraphEntry country = countries.get(i);
+		for (int i = 0; i < entries.size(); i++) {
+			GraphEntry country = entries.get(i);
 
 			if (country.getNumber() > max) {
 				max = country.getNumber();
@@ -114,10 +119,10 @@ public class Graph extends JComponent {
 		// draw lines and flags
 		int pos = 0;
 		
-		for (int i = countries.size() - 1; i >= 0 && i < countries.size(); i--) {
-			GraphEntry country = countries.get(i);
+		for (int i = entries.size() - 1; i >= 0 && i < entries.size(); i--) {
+			GraphEntry entry = entries.get(i);
 
-			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;
+			int value = (int) (((float) entry.getNumber() / (float) max) * this.getHeight()) - 20;
 
 			int x = 15 + pos++ * 20;		
 			
@@ -125,10 +130,14 @@ public class Graph extends JComponent {
 				value = 1;
 			}
 			
-			g.setColor(getMainColor(country.getIcon()));
+			g.setColor(getMainColor(entry.getIcon()));
 			g.fillRect(x, this.getHeight() - value - 10, 10, this.getHeight());
 
-			g.drawImage(country.getIcon().getImage(), x - 3, this.getHeight() - value - 14, country.getIcon().getIconWidth(), country.getIcon().getIconHeight(), null);
+			if (drawBackgroundSquare) {
+				g.setColor(Color.white);
+				g.fillRect(x - 3, this.getHeight() - value - 14, 16, 16);
+			}
+			g.drawImage(entry.getIcon().getImage(), x - 3, this.getHeight() - value - 14, entry.getIcon().getIconWidth(), entry.getIcon().getIconHeight(), null);
 
 			if (drawNumber) {
 				AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
@@ -136,12 +145,12 @@ public class Graph extends JComponent {
 				g.setFont(value < 20 ? f : f.deriveFont(at));
 					
 				
-				g.setColor(colors.getTextColor());
-				g.drawString(country.getNumber() + "", value < 20 ? x + 2 : x + 10, value < 20 ? this.getHeight() - value - 17: this.getHeight() - value + 25);
+				g.setColor(entry.getNumberColor() == null ? colors.getTextColor() : entry.getNumberColor());
+				g.drawString(entry.getNumber() + "", value < 20 ? x + 2 : x + 10, value < 20 ? this.getHeight() - value - 17: this.getHeight() - value + 25);
 			}
 		}
 
-		onUpdate(countries, 15 + countries.size() * 20);
+		onUpdate(entries, 15 + entries.size() * 20);
 	}
 
 	/**
@@ -169,19 +178,19 @@ public class Graph extends JComponent {
 	 * @param country
 	 */
 	public void add(GraphEntry country) {
-		for (int i = 0; i < countries.size(); i++) {
-			GraphEntry old = countries.get(i);
+		for (int i = 0; i < entries.size(); i++) {
+			GraphEntry old = entries.get(i);
 			if (old.equals(country)) {
 				old.setNumber(country.getNumber());
 				return;
 			}
 		}
 		
-		countries.add(country);
+		entries.add(country);
 	}
 
 	public void remove(GraphEntry country) {
-		countries.remove(country);
+		entries.remove(country);
 	}
 
 	public boolean isDrawNumber() {
@@ -192,8 +201,16 @@ public class Graph extends JComponent {
 		this.drawNumber = drawNumber;
 	}
 
+	public boolean isDrawBackgroundSquare() {
+		return drawBackgroundSquare;
+	}
+
+	public void setDrawBackgroundSquare(boolean drawBackgroundSquare) {
+		this.drawBackgroundSquare = drawBackgroundSquare;
+	}
+
 	public void clear() {
-		countries.clear();
+		entries.clear();
 	}
 	
 	public IGraphColors getColors() {

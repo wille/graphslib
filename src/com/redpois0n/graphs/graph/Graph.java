@@ -1,4 +1,4 @@
-package com.redpois0n.graphs.country;
+package com.redpois0n.graphs.graph;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,14 +20,14 @@ import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 
 @SuppressWarnings("serial")
-public class CountryGraph extends JComponent {
+public class Graph extends JComponent {
 
-	private final List<Country> countries = new ArrayList<Country>();
+	private final List<GraphEntry> countries = new ArrayList<GraphEntry>();
 
 	/**
 	 * Colors
 	 */
-	private ICountryColors colors;
+	private IGraphColors colors;
 	
 	/**
 	 * TODO
@@ -45,8 +45,8 @@ public class CountryGraph extends JComponent {
 	 */
 	private boolean isActive = true;
 	
-	public CountryGraph() {
-		this.colors = new CountryColors();
+	public Graph() {
+		this.colors = new GraphColors();
 		
 		final JPopupMenu popup = new JPopupMenu();
 		
@@ -82,7 +82,7 @@ public class CountryGraph extends JComponent {
 		this.add(popup);
 	}
 
-	public CountryGraph(ICountryColors colors) {
+	public Graph(IGraphColors colors) {
 		this();
 		this.colors = colors;		
 	}
@@ -100,15 +100,15 @@ public class CountryGraph extends JComponent {
 		int max = 0;
 
 		// sort countries
-		Collections.sort(countries, new Comparator<Country>() {
-			public int compare(Country country, Country country1) {
+		Collections.sort(countries, new Comparator<GraphEntry>() {
+			public int compare(GraphEntry country, GraphEntry country1) {
 				return country.getNumber() - country1.getNumber();
 			}
 		});
 
 		// get highest
 		for (int i = 0; i < countries.size(); i++) {
-			Country country = countries.get(i);
+			GraphEntry country = countries.get(i);
 
 			if (country.getNumber() > max) {
 				max = country.getNumber();
@@ -121,7 +121,7 @@ public class CountryGraph extends JComponent {
 		int pos = 0;
 		
 		for (int i = countries.size() - 1; i > 0; i--) {
-			Country country = countries.get(i);
+			GraphEntry country = countries.get(i);
 
 			int value = (int) (((float) country.getNumber() / (float) max) * this.getHeight()) - 20;
 
@@ -131,10 +131,10 @@ public class CountryGraph extends JComponent {
 				value = 1;
 			}
 			
-			g.setColor(getMainColor(country.getFlag()));
+			g.setColor(getMainColor(country.getIcon()));
 			g.fillRect(x, this.getHeight() - value - 10, 10, this.getHeight());
 
-			g.drawImage(country.getFlag().getImage(), x - 3, this.getHeight() - value - 14, country.getFlag().getIconWidth(), country.getFlag().getIconHeight(), null);
+			g.drawImage(country.getIcon().getImage(), x - 3, this.getHeight() - value - 14, country.getIcon().getIconWidth(), country.getIcon().getIconHeight(), null);
 
 			if (drawNumber) {
 				AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
@@ -155,7 +155,7 @@ public class CountryGraph extends JComponent {
 	 * @param sortedList sorted country list
 	 * @param recommendedX recommended width
 	 */
-	public void onUpdate(List<Country> sortedList, int recommendedX) {
+	public void onUpdate(List<GraphEntry> sortedList, int recommendedX) {
 
 	}
 	
@@ -174,9 +174,9 @@ public class CountryGraph extends JComponent {
 	 * Adds a country to the list
 	 * @param country
 	 */
-	public void add(Country country) {
+	public void add(GraphEntry country) {
 		for (int i = 0; i < countries.size(); i++) {
-			Country old = countries.get(i);
+			GraphEntry old = countries.get(i);
 			if (old.equals(country)) {
 				old.setNumber(country.getNumber());
 				return;
@@ -186,7 +186,7 @@ public class CountryGraph extends JComponent {
 		countries.add(country);
 	}
 
-	public void remove(Country country) {
+	public void remove(GraphEntry country) {
 		countries.remove(country);
 	}
 
@@ -212,11 +212,11 @@ public class CountryGraph extends JComponent {
 		countries.clear();
 	}
 	
-	public ICountryColors getColors() {
+	public IGraphColors getColors() {
 		return colors;
 	}
 
-	public void setColors(ICountryColors colors) {
+	public void setColors(IGraphColors colors) {
 		this.colors = colors;
 	}
 

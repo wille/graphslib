@@ -1,8 +1,8 @@
-package com.redpois0n.graphs.country;
+package com.redpois0n.graphs.graph;
 
 import java.awt.Color;
 
-public class CountryColors implements ICountryColors {
+public class GraphColors implements IGraphColors {
 
 	@Override
 	public Color getInnerFillColor() {

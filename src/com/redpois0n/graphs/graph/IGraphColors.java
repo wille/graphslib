@@ -1,8 +1,8 @@
-package com.redpois0n.graphs.country;
+package com.redpois0n.graphs.graph;
 
 import java.awt.Color;
 
-public abstract interface ICountryColors {
+public abstract interface IGraphColors {
 	
 	public abstract Color getInnerFillColor();
 	

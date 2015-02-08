@@ -2,10 +2,11 @@
 
 Small library that currently includes
 
-- **Country statistic graph** - Orders a list of countries with a number in order and draws them with flags
+- **Normal graph** - Orders a list of entries with a number in order and draws them with icons, like flags or operating system icons
 
 ![Screenshot](screenshots/countrygraph.png)
 
+![Screenshot](screenshots/osgraph.png)
 
 - **Windows 7 and below task manager remake** - Good for example a performance monitor
 

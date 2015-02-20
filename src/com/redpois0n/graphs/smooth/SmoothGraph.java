@@ -209,7 +209,7 @@ public class SmoothGraph extends JComponent {
 		int drawValueUp = 0;
 		int drawValueDown = 0;
 
-		for (int i = this.getWidth() - 11; i > 60; i--) {
+		for (int i = this.getWidth(); i > 60; i--) {
 			if (index > 0) {
 				value = valuePairs.get(index--);
 				

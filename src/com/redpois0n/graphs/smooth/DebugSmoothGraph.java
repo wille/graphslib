@@ -1,10 +1,6 @@
 package com.redpois0n.graphs.smooth;
 
-
-import java.util.Random;
-
 import javax.swing.JFrame;
-
 
 public class DebugSmoothGraph {
 
@@ -13,20 +9,21 @@ public class DebugSmoothGraph {
 		frame.setSize(600, 300);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		final SmoothGraph graph = new SmoothGraph(new SmoothColors());
-		
+
 		new Thread("Random thread") {
 			@Override
 			public void run() {
-				int lastUp = 0;
-				int lastDown = 0;
-				while (true) {									
-					lastUp = (new Random()).nextInt((int) Math.pow(1024, 2));
-					lastDown = (new Random()).nextInt((int) Math.pow(1024, 2) * 10);
+				int lastAvailable = 0;
+				int lastUsed = 0;
+				while (true) {
 
-					graph.addValues(lastUp, lastDown);
-														
+					lastUsed = (int) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+					lastAvailable = (int) Runtime.getRuntime().totalMemory();
+
+					graph.addValues(lastUsed, lastAvailable);
+
 					try {
 						Thread.sleep(50L);
 					} catch (Exception e) {
@@ -35,9 +32,9 @@ public class DebugSmoothGraph {
 				}
 			}
 		}.start();
-		
+
 		frame.add(graph);
-		
+
 		frame.setVisible(true);
 	}
 

@@ -23,7 +23,7 @@ public class SmoothGraph extends JComponent {
 	/**
 	 * Time between ticks in ms
 	 */
-	public static final long TICKS = 10L;
+	public static final long TICKS = 50L;
 
 	/**
 	 * Maximum values saved in memory
@@ -211,10 +211,14 @@ public class SmoothGraph extends JComponent {
 
 		int drawValueUp = 0;
 		int drawValueDown = 0;
-
+						
 		for (int i = this.getWidth(); i > 60; i--) {
 			if (index > 0) {
-				value = valuePairs.get(index--);
+				index--;
+
+				
+				
+				value = valuePairs.get(index);
 				
 				int height = this.getHeight();
 

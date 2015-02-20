@@ -155,18 +155,21 @@ public class SmoothGraph extends JComponent {
 		int max = 0;
 
 		for (ValuePair vp : valuePairs) {
-			if (vp.getDown() > max && drawDownloadBars()) {
-				max = vp.getDown();
+			if (vp.getUsed() > max && drawUsed()) {
+				max = vp.getUsed();
 			}
 
-			if (vp.getUp() > max && drawUploadBars()) {
-				max = vp.getUp();
+			if (vp.getAvailable() > max && drawAvailable()) {
+				max = vp.getAvailable();
 			}
 		}
 
 		if (max < 10) {
 			max = 10;
 		}
+		
+		max *= 10;
+		
 
 		setMaximum(max);
 
@@ -216,17 +219,17 @@ public class SmoothGraph extends JComponent {
 				int height = this.getHeight();
 
 
-				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * height);
-				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * height);
+				drawValueUp = (int) (((float) value.getUsed() / (float) maximum) * height);
+				drawValueDown = (int) (((float) value.getAvailable() / (float) maximum) * height);
 
 				boolean drawDownFirst = drawValueDown > drawValueUp;		
 				
-				if (drawDownFirst && drawDownloadBars() || !drawDownFirst && drawUploadBars()) {
+				if (drawDownFirst && drawUsed() || !drawDownFirst && drawAvailable()) {
 					g.setColor(drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
 					g.fillRect(i, height - (drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
 
-				if (!drawDownFirst && drawDownloadBars() || drawDownFirst && drawUploadBars()) {
+				if (!drawDownFirst && drawUsed() || drawDownFirst && drawAvailable()) {
 					g.setColor(!drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
 					g.fillRect(i, height - (!drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
@@ -293,7 +296,7 @@ public class SmoothGraph extends JComponent {
 		this.colors = colors;
 	}
 
-	public boolean drawUploadBars() {
+	public boolean drawAvailable() {
 		return showUp;
 	}
 
@@ -301,7 +304,7 @@ public class SmoothGraph extends JComponent {
 		this.showUp = showUp;
 	}
 
-	public boolean drawDownloadBars() {
+	public boolean drawUsed() {
 		return showDown;
 	}
 

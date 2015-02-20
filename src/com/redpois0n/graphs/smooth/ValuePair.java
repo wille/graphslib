@@ -2,27 +2,28 @@ package com.redpois0n.graphs.smooth;
 
 public class ValuePair {
 	
-	private int up;
-	private int down;
+	private int used;
+	private int available;
 
-	public ValuePair(int up, int down) {
-		this.up = up;
-		this.down = down;
+	public ValuePair(int used, int available) {
+		this.used = used;
+		this.available = available;
 	}
 
-	public int getUp() {
-		return up;
+	public int getAvailable() {
+		return available;
 	}
 
-	public void setUp(int up) {
-		this.up = up;
+	public void setAvailable(int available) {
+		this.available = available;
 	}
 
-	public int getDown() {
-		return down;
+	public int getUsed() {
+		return used;
 	}
 
-	public void setDown(int down) {
-		this.down = down;
+	public void setUsed(int used) {
+		this.used = used;
 	}
+
 }

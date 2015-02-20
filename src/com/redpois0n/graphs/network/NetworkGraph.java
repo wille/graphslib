@@ -15,6 +15,8 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 
+import com.redpois0n.graphs.utils.DataUnits;
+
 @SuppressWarnings("serial")
 public class NetworkGraph extends JComponent {
 

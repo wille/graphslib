@@ -1,4 +1,4 @@
-package com.redpois0n.graphs.network;
+package com.redpois0n.graphs.utils;
 
 
 public class DataUnits {

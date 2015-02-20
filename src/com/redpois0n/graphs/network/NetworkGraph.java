@@ -117,7 +117,7 @@ public class NetworkGraph extends JComponent {
 		});
 		
 		JCheckBoxMenuItem toggleOutgoing = new JCheckBoxMenuItem("Show Outgoing", true);
-		toggleIncoming.addActionListener(new ActionListener() {
+		toggleOutgoing.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setDrawUploadBars(((JCheckBoxMenuItem)e.getSource()).isSelected());

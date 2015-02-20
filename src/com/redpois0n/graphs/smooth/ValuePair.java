@@ -14,16 +14,8 @@ public class ValuePair {
 		return available;
 	}
 
-	public void setAvailable(int available) {
-		this.available = available;
-	}
-
 	public int getUsed() {
 		return used;
-	}
-
-	public void setUsed(int used) {
-		this.used = used;
 	}
 
 }

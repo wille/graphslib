@@ -1,6 +1,5 @@
 package com.redpois0n.graphs.smooth;
 
-import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -61,14 +60,14 @@ public class SmoothGraph extends JComponent {
 	private boolean running = true;
 
 	/**
-	 * Show upload bars
+	 * Show used
 	 */
-	private boolean showUp = true;
+	private boolean showUsed = true;
 
 	/**
-	 * Show download bars
+	 * Show maximum
 	 */
-	private boolean showDown = true;
+	private boolean showMaximum = true;
 
 	/**
 	 * Grids to show
@@ -108,19 +107,19 @@ public class SmoothGraph extends JComponent {
 			}
 		});
 		
-		JCheckBoxMenuItem toggleIncoming = new JCheckBoxMenuItem("Show Incoming", true);
+		JCheckBoxMenuItem toggleIncoming = new JCheckBoxMenuItem("Show Maximum", true);
 		toggleIncoming.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDrawDownloadBars(((JCheckBoxMenuItem)e.getSource()).isSelected());
+				setDrawMaximum(((JCheckBoxMenuItem)e.getSource()).isSelected());
 			}
 		});
 		
-		JCheckBoxMenuItem toggleOutgoing = new JCheckBoxMenuItem("Show Outgoing", true);
+		JCheckBoxMenuItem toggleOutgoing = new JCheckBoxMenuItem("Show Used", true);
 		toggleOutgoing.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setDrawUploadBars(((JCheckBoxMenuItem)e.getSource()).isSelected());
+				setDrawUsed(((JCheckBoxMenuItem)e.getSource()).isSelected());
 			}
 		});
 		
@@ -157,10 +156,12 @@ public class SmoothGraph extends JComponent {
 		for (ValuePair vp : valuePairs) {
 			if (vp.getUsed() > max && drawUsed()) {
 				max = vp.getUsed();
+				System.out.println("used");
 			}
 
-			if (vp.getAvailable() > max && drawAvailable()) {
+			if (vp.getAvailable() > max && drawMaximum()) {
 				max = vp.getAvailable();
+				System.out.println("maximum");
 			}
 		}
 
@@ -168,7 +169,7 @@ public class SmoothGraph extends JComponent {
 			max = 10;
 		}
 		
-		max *= 10;
+		max *= 1;
 		
 
 		setMaximum(max);
@@ -207,7 +208,7 @@ public class SmoothGraph extends JComponent {
 		// set line thickness
 
 		((Graphics2D) g).setStroke(new BasicStroke(2));
-		((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
+		//((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.5F));
 
 		int drawValueUp = 0;
 		int drawValueDown = 0;
@@ -215,9 +216,7 @@ public class SmoothGraph extends JComponent {
 		for (int i = this.getWidth(); i > 60; i--) {
 			if (index > 0) {
 				index--;
-
-				
-				
+		
 				value = valuePairs.get(index);
 				
 				int height = this.getHeight();
@@ -228,12 +227,12 @@ public class SmoothGraph extends JComponent {
 
 				boolean drawDownFirst = drawValueDown > drawValueUp;		
 				
-				if (drawDownFirst && drawUsed() || !drawDownFirst && drawAvailable()) {
+				if (drawDownFirst && drawMaximum() || !drawDownFirst && drawMaximum()) {
 					g.setColor(drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
 					g.fillRect(i, height - (drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
 
-				if (!drawDownFirst && drawUsed() || drawDownFirst && drawAvailable()) {
+				if (!drawDownFirst && drawMaximum() || drawDownFirst && drawUsed()) {
 					g.setColor(!drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
 					g.fillRect(i, height - (!drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
@@ -300,20 +299,20 @@ public class SmoothGraph extends JComponent {
 		this.colors = colors;
 	}
 
-	public boolean drawAvailable() {
-		return showUp;
-	}
-
-	public void setDrawUploadBars(boolean showUp) {
-		this.showUp = showUp;
-	}
-
 	public boolean drawUsed() {
-		return showDown;
+		return showUsed;
 	}
 
-	public void setDrawDownloadBars(boolean showDown) {
-		this.showDown = showDown;
+	public void setDrawUsed(boolean showUp) {
+		this.showUsed = showUp;
+	}
+
+	public boolean drawMaximum() {
+		return showMaximum;
+	}
+
+	public void setDrawMaximum(boolean showDown) {
+		this.showMaximum = showDown;
 	}
 
 	public int getGrids() {

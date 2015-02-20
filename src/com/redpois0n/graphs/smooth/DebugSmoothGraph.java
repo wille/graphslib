@@ -22,13 +22,13 @@ public class DebugSmoothGraph {
 				int lastUp = 0;
 				int lastDown = 0;
 				while (true) {									
-					lastUp = (new Random()).nextInt((int) Math.pow(1024, 3) / 2);
-					lastDown = (new Random()).nextInt((int) Math.pow(1024, 4));
+					lastUp = (new Random()).nextInt((int) Math.pow(1024, 2));
+					lastDown = (new Random()).nextInt((int) Math.pow(1024, 2) * 10);
 
 					graph.addValues(lastUp, lastDown);
 														
 					try {
-						Thread.sleep(100L);
+						Thread.sleep(50L);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

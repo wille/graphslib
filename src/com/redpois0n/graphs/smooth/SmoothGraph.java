@@ -23,7 +23,7 @@ public class SmoothGraph extends JComponent {
 	/**
 	 * Time between ticks in ms
 	 */
-	public static final long TICKS = 100L;
+	public static final long TICKS = 10L;
 
 	/**
 	 * Maximum values saved in memory
@@ -144,7 +144,7 @@ public class SmoothGraph extends JComponent {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		while (valuePairs.size() * 11 > this.getWidth() - 50) {
+		while (valuePairs.size() > this.getWidth() - 50) {
 			if (valuePairs.size() > 0) {
 				valuePairs.remove(0);
 			} else {
@@ -177,8 +177,10 @@ public class SmoothGraph extends JComponent {
 		// draw grid
 		g.setColor(colors.getGridColor());
 		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
-			g.drawLine(0, i, this.getWidth(), i);
+			g.drawLine(55, i, 60, i);
 		}
+		
+		g.drawLine(60, 0, 60, this.getHeight());
 
 		// draw data size strings
 		int lineNumber = 0;
@@ -207,26 +209,29 @@ public class SmoothGraph extends JComponent {
 		int drawValueUp = 0;
 		int drawValueDown = 0;
 
-		for (int i = this.getWidth() - 11; i > 50; i--) {
+		for (int i = this.getWidth() - 11; i > 60; i--) {
 			if (index > 0) {
 				value = valuePairs.get(index--);
+				
+				int height = this.getHeight();
 
-				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * this.getHeight());
-				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * this.getHeight());
 
-				boolean drawDownFirst = drawValueDown > drawValueUp;
+				drawValueUp = (int) (((float) value.getUp() / (float) maximum) * height);
+				drawValueDown = (int) (((float) value.getDown() / (float) maximum) * height);
 
+				boolean drawDownFirst = drawValueDown > drawValueUp;		
+				
 				if (drawDownFirst && drawDownloadBars() || !drawDownFirst && drawUploadBars()) {
-					g.setColor(drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
-					g.fillRect(i, this.getHeight() - (drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
+					g.setColor(drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
+					g.fillRect(i, height - (drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
 
 				if (!drawDownFirst && drawDownloadBars() || drawDownFirst && drawUploadBars()) {
-					g.setColor(!drawDownFirst ? colors.getDownloadColor() : colors.getUploadColor());
-					g.fillRect(i, this.getHeight() - (!drawDownFirst ? drawValueDown : drawValueUp), 10, this.getHeight());
+					g.setColor(!drawDownFirst ? colors.getFreeColor() : colors.getUsedColor());
+					g.fillRect(i, height - (!drawDownFirst ? drawValueDown : drawValueUp), 2, height);
 				}
 
-				i -= 10;
+				i -= 1;
 			} else {
 				break;
 			}

@@ -15,13 +15,13 @@ public class SmoothColors implements ISmoothColors {
 	}
 
 	@Override
-	public Color getDownloadColor() {
-		return new Color(0x0000FF);
+	public Color getFreeColor() {
+		return new Color(0xB8CADA);
 	}
 
 	@Override
-	public Color getUploadColor() {
-		return new Color(0x00FF00);
+	public Color getUsedColor() {
+		return new Color(0x75A9D6);
 	}
 	
 	@Override

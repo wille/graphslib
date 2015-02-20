@@ -8,9 +8,9 @@ public abstract interface ISmoothColors {
 	
 	public abstract Color getBorderColor();
 	
-	public abstract Color getDownloadColor();
+	public abstract Color getFreeColor();
 	
-	public abstract Color getUploadColor();
+	public abstract Color getUsedColor();
 			
 	public abstract Color getGridColor();
 }

@@ -156,12 +156,10 @@ public class SmoothGraph extends JComponent {
 		for (ValuePair vp : valuePairs) {
 			if (vp.getUsed() > max && drawUsed()) {
 				max = vp.getUsed();
-				System.out.println("used");
 			}
 
 			if (vp.getAvailable() > max && drawMaximum()) {
 				max = vp.getAvailable();
-				System.out.println("maximum");
 			}
 		}
 

@@ -45,11 +45,6 @@ public class SmoothGraph extends JComponent {
 	private int position = 9;
 
 	/**
-	 * Text to draw
-	 */
-	private String text = "?";
-
-	/**
 	 * Max is 100 by default, 0 minimum
 	 */
 	private int maximum = 100;
@@ -271,14 +266,6 @@ public class SmoothGraph extends JComponent {
 
 	public int getMaximum() {
 		return this.maximum;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 	public void dispose() {

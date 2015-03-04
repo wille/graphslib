@@ -17,6 +17,11 @@ Small library that currently includes
 
 ![Screenshot](screenshots/networkgraph.png)
 
+- **Smooth meter** - A smoother graph, example displays JVM memory usage
+
+![Screenshot](screenshots/smoothgraph.png)
+
+
 ## Examples
 
 You can find examples in the Debug classes in the corresponding package

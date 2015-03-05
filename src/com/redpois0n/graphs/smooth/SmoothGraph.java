@@ -162,9 +162,7 @@ public class SmoothGraph extends JComponent {
 			max = 10;
 		}
 		
-		max *= 1;
-		max += max / 5;
-		
+		max += max / 5;		
 
 		setMaximum(max);
 

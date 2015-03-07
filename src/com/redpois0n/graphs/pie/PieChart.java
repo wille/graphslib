@@ -28,6 +28,12 @@ public class PieChart extends JComponent {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		int p = startAngle;
+		
+		int total = -1;
+		
+		for (PieEntry entry : entries) {
+			total += entry.getValue();
+		}
 
 		for (int i = 0; i < entries.size(); i++) {
 			PieEntry entry = entries.get(i);
@@ -36,7 +42,7 @@ public class PieChart extends JComponent {
 			g2d.setColor(entry.getColor());
 
 			double val = entry.getValue();
-			double angle = (val / 100) * 360;
+			double angle = (val / total) * 360;
 
 			g2d.fillArc(0, 0, super.getWidth(), super.getWidth(), p, (int) angle);
 

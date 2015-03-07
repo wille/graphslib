@@ -17,10 +17,10 @@ public class DebugPieChart {
 
 		List<PieEntry> entries = new ArrayList<PieEntry>();
 
-		entries.add(new PieEntry(25, Color.red));
-		entries.add(new PieEntry(25, Color.yellow));
-		entries.add(new PieEntry(25, Color.blue));
-		entries.add(new PieEntry(25, Color.green));
+		entries.add(new PieEntry(25.2D, Color.red));
+		entries.add(new PieEntry(25.1D, Color.yellow));
+		entries.add(new PieEntry(25.9D, Color.blue));
+		entries.add(new PieEntry(35.5D, Color.green));
 
 		PieChart graph = new PieChart(entries);
 		graph.setBounds(0, 0, 300, 300);

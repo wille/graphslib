@@ -11,15 +11,15 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PieChart extends JComponent {
 
-	private List<PieEntry> entries;
+	private List<PieSlice> entries;
 	private int startAngle = 90;
 
-	public PieChart(List<PieEntry> entries) {
+	public PieChart(List<PieSlice> entries) {
 		this.entries = entries;
 	}
 	
 	public PieChart() {
-		this.entries = new ArrayList<PieEntry>();
+		this.entries = new ArrayList<PieSlice>();
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class PieChart extends JComponent {
 		
 		int total = -1;
 		
-		for (PieEntry entry : entries) {
+		for (PieSlice entry : entries) {
 			total += entry.getValue();
 		}
 
 		for (int i = 0; i < entries.size(); i++) {
-			PieEntry entry = entries.get(i);
+			PieSlice entry = entries.get(i);
 			
 			
 			g2d.setColor(entry.getColor());

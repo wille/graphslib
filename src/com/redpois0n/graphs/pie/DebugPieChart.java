@@ -15,12 +15,12 @@ public class DebugPieChart {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 
-		List<PieEntry> entries = new ArrayList<PieEntry>();
+		List<PieSlice> entries = new ArrayList<PieSlice>();
 
-		entries.add(new PieEntry(25.2D, Color.red));
-		entries.add(new PieEntry(25.1D, Color.yellow));
-		entries.add(new PieEntry(25.9D, Color.blue));
-		entries.add(new PieEntry(35.5D, Color.green));
+		entries.add(new PieSlice(25.2D, Color.red));
+		entries.add(new PieSlice(25.1D, Color.yellow));
+		entries.add(new PieSlice(25.9D, Color.blue));
+		entries.add(new PieSlice(35.5D, Color.green));
 
 		PieChart graph = new PieChart(entries);
 		graph.setBounds(0, 0, 300, 300);

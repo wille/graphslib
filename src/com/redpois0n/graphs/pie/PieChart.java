@@ -1,19 +1,47 @@
 package com.redpois0n.graphs.pie;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 public class PieChart extends JComponent {
+
+	private List<PieEntry> entries;
+	private int startAngle = 90;
+
+	public PieChart(List<PieEntry> entries) {
+		this.entries = entries;
+	}
 	
 	public PieChart() {
-		
-	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		this.entries = new ArrayList<PieEntry>();
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		int p = startAngle;
+
+		for (int i = 0; i < entries.size(); i++) {
+			PieEntry entry = entries.get(i);
+			
+			
+			g2d.setColor(entry.getColor());
+
+			double val = entry.getValue();
+			double angle = (val / 100) * 360;
+
+			g2d.fillArc(0, 0, super.getWidth(), super.getWidth(), p, (int) angle);
+
+			p = (int) (p + angle);
+		}
+
+	}
 }

@@ -6,10 +6,16 @@ public class PieSlice {
 	
 	private double value;
 	private Color color;
+	private String text;
 	
-	public PieSlice(double value, Color color) {
+	public PieSlice(double value, Color color, String text) {
 		this.value = value;
 		this.color = color;
+		this.text = text;
+	}
+	
+	public PieSlice(double value, Color color) {
+		this(value, color, null);
 	}
 	
 	public double getValue() {
@@ -18,6 +24,10 @@ public class PieSlice {
 
 	public Color getColor() {
 		return color;
+	}
+	
+	public String getText() {
+		return text;
 	}
 
 }

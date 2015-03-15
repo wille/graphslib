@@ -137,8 +137,11 @@ public class Graph extends JComponent {
 				g.setColor(colors.getInnerFillColor());
 				g.fillRect(x - 3, this.getHeight() - value - 14, 16, 16);
 			}
-			g.drawImage(entry.getIcon().getImage(), x - 3, this.getHeight() - value - 14, entry.getIcon().getIconWidth(), entry.getIcon().getIconHeight(), null);
 
+			if (entry.getIcon() != null) {
+				g.drawImage(entry.getIcon().getImage(), x - 3, this.getHeight() - value - 14, entry.getIcon().getIconWidth(), entry.getIcon().getIconHeight(), null);
+			}
+			
 			if (drawNumber) {
 				AffineTransform at = AffineTransform.getRotateInstance(Math.toRadians(-90));
 				Font f = new Font("Arial", Font.BOLD, 12);
@@ -222,6 +225,10 @@ public class Graph extends JComponent {
 	}
 
 	public static Color getMainColor(ImageIcon icon) {
+		if (icon == null) {
+			return Color.black;
+		}
+		
 		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
 
 		image.createGraphics();

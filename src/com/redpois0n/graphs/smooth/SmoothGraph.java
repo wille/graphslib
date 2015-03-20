@@ -47,7 +47,7 @@ public class SmoothGraph extends JComponent {
 	/**
 	 * Max is 100 by default, 0 minimum
 	 */
-	private int maximum = 100;
+	private long maximum = 100;
 
 	/**
 	 * Is this component still active
@@ -146,7 +146,7 @@ public class SmoothGraph extends JComponent {
 			}
 		}
 
-		int max = 0;
+		long max = 0;
 
 		for (ValuePair vp : valuePairs) {
 			if (vp.getUsed() > max && drawUsed()) {
@@ -181,8 +181,8 @@ public class SmoothGraph extends JComponent {
 		// draw data size strings
 		int lineNumber = 0;
 		for (int i = 0; i < this.getHeight(); i += this.getHeight() / grids) {
-			int part = max / grids;
-			int what = max - (part * (lineNumber++));
+			long part = max / grids;
+			long what = max - (part * (lineNumber++));
 			g.drawString(DataUnits.getAsString(what) + "", 5, i + 15);
 		}
 
@@ -247,7 +247,7 @@ public class SmoothGraph extends JComponent {
 
 	}
 
-	public void addValues(int i, int l) {
+	public void addValues(long i, long l) {
 		valuePairs.add(new ValuePair(i, l));
 	}
 
@@ -259,11 +259,11 @@ public class SmoothGraph extends JComponent {
 		}
 	}
 
-	public void setMaximum(int maximum) {
+	public void setMaximum(long maximum) {
 		this.maximum = maximum;
 	}
 
-	public int getMaximum() {
+	public long getMaximum() {
 		return this.maximum;
 	}
 

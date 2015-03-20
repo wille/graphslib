@@ -2,19 +2,19 @@ package com.redpois0n.graphs.smooth;
 
 public class ValuePair {
 	
-	private int used;
-	private int available;
+	private long used;
+	private long available;
 
-	public ValuePair(int used, int available) {
+	public ValuePair(long used, long available) {
 		this.used = used;
 		this.available = available;
 	}
 
-	public int getAvailable() {
+	public long getAvailable() {
 		return available;
 	}
 
-	public int getUsed() {
+	public long getUsed() {
 		return used;
 	}
 

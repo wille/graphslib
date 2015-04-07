@@ -27,11 +27,16 @@ public class PanelMonitors extends JPanel {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 	private List<PanelMonitor> panels = new ArrayList<PanelMonitor>();
 	private boolean draggable;
-	private double scale = 0.05D;
+	private double scale;
 	
 	public PanelMonitors(RemoteMonitor[] m, boolean draggable) {
+		this(m, draggable, 0.1D);
+	}
+	
+	public PanelMonitors(RemoteMonitor[] m, boolean draggable, double scale) {
 		this.monitors = m;
 		this.draggable = draggable;
+		this.scale = scale;
 		
 		setLayout(null);
 

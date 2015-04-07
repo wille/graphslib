@@ -27,6 +27,7 @@ public class PanelMonitors extends JPanel {
 	private List<MonitorListener> listeners = new ArrayList<MonitorListener>();
 	private List<PanelMonitor> panels = new ArrayList<PanelMonitor>();
 	private boolean draggable;
+	private double scale = 0.05D;
 	
 	public PanelMonitors(RemoteMonitor[] m, boolean draggable) {
 		this.monitors = m;
@@ -78,8 +79,8 @@ public class PanelMonitors extends JPanel {
 			int x = monitor.getX() + Math.abs(lowest.x);
 			int y = monitor.getY() + Math.abs(lowest.y);
 			
-			panel.setBounds(x / 20, y / 20, monitor.getWidth() / 20, monitor.getHeight() / 20);
-			panel.setSize(monitor.getWidth() / 20, monitor.getHeight() / 20);
+			panel.setBounds((int) (x * scale), (int) (y * scale), (int) (monitor.getWidth() * scale), (int) (monitor.getHeight() * scale));
+			panel.setSize((int) (monitor.getWidth() * scale), (int) (monitor.getHeight() * scale));
 			
 			add(panel);
 			panels.add(panel);
@@ -87,7 +88,7 @@ public class PanelMonitors extends JPanel {
 		
 		System.out.println(highest.x + ", " + highest.y + " " + lowest.x + ", " + lowest.y);
 		
-		Dimension d = new Dimension(highest.x / 20 + 100, highest.y / 20 + 100);
+		Dimension d = new Dimension((int) (highest.x * scale) + 100, (int) (highest.y * scale) + 100);
 		
 		super.setPreferredSize(d);
 		super.setSize(d);
@@ -171,8 +172,8 @@ public class PanelMonitors extends JPanel {
 						
 						PanelMonitor.this.setLocation(x, y);
 						
-						monitor.setX(x * 20);
-						monitor.setY(y * 20);
+						monitor.setX((int) (x / scale));
+						monitor.setY((int) (y / scale));
 					}
 				});
 			}

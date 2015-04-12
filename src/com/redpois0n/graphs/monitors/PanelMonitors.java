@@ -206,7 +206,11 @@ public class PanelMonitors extends JPanel {
 				icon = (ImageIcon) IconUtils.getIcon("monitor_normal");
 			}
 			
-			Image image = icon.getImage();
+			Image image = null;
+			
+			if (icon != null) {
+				image = icon.getImage();
+			}
 			
 			if (thumbnail != null) {
 				image = thumbnail;

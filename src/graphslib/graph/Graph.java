@@ -1,6 +1,7 @@
 package graphslib.graph;
 
-import java.awt.Color;
+import graphslib.utils.ColorUtils;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -8,13 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
@@ -113,8 +112,6 @@ public class Graph extends JComponent {
 				max = country.getNumber();
 			}
 		}
-		
-		
 
 		// draw lines and flags
 		int pos = 0;
@@ -130,7 +127,7 @@ public class Graph extends JComponent {
 				value = 1;
 			}
 			
-			g.setColor(getMainColor(entry.getIcon()));
+			g.setColor(ColorUtils.getCommonColor(entry.getIcon().getImage()));
 			g.fillRect(x, this.getHeight() - value - 10, 10, this.getHeight());
 
 			if (drawBackgroundSquare) {
@@ -222,22 +219,6 @@ public class Graph extends JComponent {
 
 	public void setColors(IGraphColors colors) {
 		this.colors = colors;
-	}
-
-	public static Color getMainColor(ImageIcon icon) {
-		if (icon == null) {
-			return Color.black;
-		}
-		
-		BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
-
-		image.createGraphics();
-		image.getGraphics().drawImage(icon.getImage(), 0, 0, null);
-		int clr = image.getRGB(image.getWidth() / 2, image.getHeight() / 2);
-
-		image.getGraphics().dispose();
-
-		return new Color(clr);
 	}
 
 }

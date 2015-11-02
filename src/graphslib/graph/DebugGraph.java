@@ -40,7 +40,7 @@ public class DebugGraph {
 				graph.add(new GraphEntry("fi", max / 10, "/flags/"));
 			} else {
 				graph.setDrawBackgroundSquare(true);
-				graph.add(new GraphEntry("Windows 8", max, IconUtils.getIcon("os_win8")));
+				graph.add(new GraphEntry("Windows 10", max, IconUtils.getIcon("os_win8")));
 				graph.add(new GraphEntry("Mac OS X", max / 2, IconUtils.getIcon("os_mac")));
 				graph.add(new GraphEntry("Linux", max / 3, IconUtils.getIcon("os_linux")));
 				graph.add(new GraphEntry("Unknown", 1, IconUtils.getIcon("os_unknown")));
